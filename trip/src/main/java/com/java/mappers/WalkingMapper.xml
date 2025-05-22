@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.dao.WalkingDAO">
+
+	<select id="getNearbyCourses" resultType="com.java.vo.WalkingVO">
+		SELECT *
+	    FROM walking
+	    WHERE
+	        111.045 * (
+            	ACOS(
+	                COS(#{walking_latitude} * (ACOS(-1) / 180))
+	                * COS(walking_latitude * (ACOS(-1) / 180))
+	                * COS((walking_longitude - #{walking_longitude}) * (ACOS(-1) / 180))
+	                + SIN(#{walking_latitude} * (ACOS(-1) / 180))
+	                * SIN(walking_latitude * (ACOS(-1) / 180))
+      	      )
+       		 ) * (180 / ACOS(-1)) &lt;= 5
+    </select>
+    
+    <update id="insertWalking" parameterType="com.java.vo.WalkingVO">
+    	UPDATE walking  
+      	SET walking_cnt = walking_cnt+1		
+    	WHERE walking_id = #{walking_id ,jdbcType=INTEGER}
+    
+</update>
+</mapper>

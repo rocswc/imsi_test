@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.dao.BookmarkHikingDAO">
+
+<select id="getBookmarkHiking" resultType="com.java.vo.Bookmark_hikingVO">
+	SELECT 
+	    h.human_id,
+	    h.human_name,
+	    hb.hiking_id,
+	    hi.hiking_name,
+	    hi.hiking_distance,
+	    hi.hiking_height,
+		hi.hiking_level,
+	    hi.hiking_info,
+	    hb.hiking_date,
+	    hi.hiking_latitude,
+	    hi.hiking_longitude
+	FROM hiking_bookmark hb
+	JOIN human h ON hb.human_id = h.human_id
+	JOIN hiking hi ON hb.hiking_id = hi.hiking_id
+	WHERE hb.human_id = #{human_id}
+</select>
+
+<insert id="insertBookmarkHiking" parameterType="com.java.vo.Bookmark_hikingVO">
+    INSERT INTO hiking_bookmark ( 
+        human_id,					
+        hiking_id,				  
+		hiking_date				
+    )
+    VALUES (					
+        #{human_id},
+        #{hiking_id},
+        SYSDATE
+    )
+</insert>
+
+<delete id="deleteBookmarkHiking" parameterType="com.java.vo.Bookmark_hikingVO">
+	DELETE FROM hiking_bookmark
+	WHERE human_id = #{human_id}
+	AND hiking_id = #{hiking_id}
+</delete>	
+	
+</mapper> 

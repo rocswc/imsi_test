@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.dao.HikingDAO">
+
+	<select id="getNearbyCourses" resultType="com.java.vo.HikingVO">
+		SELECT *
+	    FROM hiking
+	    WHERE
+	        111.045 * (
+            	ACOS(
+	                COS(#{hiking_latitude} * (ACOS(-1) / 180))
+	                * COS(hiking_latitude * (ACOS(-1) / 180))
+	                * COS((hiking_longitude - #{hiking_longitude}) * (ACOS(-1) / 180))
+	                + SIN(#{hiking_latitude} * (ACOS(-1) / 180))
+	                * SIN(hiking_latitude * (ACOS(-1) / 180))
+      	      )
+       		 ) * (180 / ACOS(-1)) &lt;= 100
+    </select>
+    
+    <update id="insertHiking" parameterType="com.java.vo.HikingVO">
+    	UPDATE hiking  
+      	SET hiking_cnt = hiking_cnt+1		
+    	WHERE hiking_id = #{hiking_id ,jdbcType=INTEGER}
+	</update>
+    
+</mapper>

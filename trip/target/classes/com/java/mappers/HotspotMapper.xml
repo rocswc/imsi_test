@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.dao.HotspotDAO">
+
+	<select id="getNearbyCourses" resultType="com.java.vo.HotspotVO">
+		SELECT *
+	    FROM hotspot
+	    WHERE
+	        111.045 * (
+            	ACOS(
+	                COS(#{hotspot_latitude} * (ACOS(-1) / 180))
+	                * COS(hotspot_latitude * (ACOS(-1) / 180))
+	                * COS((hotspot_longitude - #{hotspot_longitude}) * (ACOS(-1) / 180))
+	                + SIN(#{hotspot_latitude} * (ACOS(-1) / 180))
+	                * SIN(hotspot_latitude * (ACOS(-1) / 180))
+      	      )
+       		 ) * (180 / ACOS(-1)) &lt;= 100
+    </select>
+</mapper>
