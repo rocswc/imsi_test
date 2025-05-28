@@ -352,7 +352,7 @@ body {
 		<!-- 로고 -->
 		<div class="logo">
 		<img class="logo-image" alt="로고이미지" src="">
-			<h1><a href="index.jsp">동틀무렵</a></h1>
+			<h1><a href="index2.jsp">동틀무렵</a></h1>
 		</div>
 				
 		<!-- 로그인/회원가입 버튼 -->
@@ -380,7 +380,7 @@ body {
 					<li><a href="game">대회정보</a></li>
 					<li><a href="hotspot">주변명소</a></li>
 					<li><a href="board">커뮤니티</a></li>
-					<li><a href="bookmark_walking">마이페이지</a></li>
+					<li><a href="bookmark">마이페이지</a></li>
 				</ul>
 			</div>
 		</div>

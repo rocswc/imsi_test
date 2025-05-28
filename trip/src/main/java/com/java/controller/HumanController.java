@@ -138,7 +138,7 @@ public class HumanController {
 
 		session.invalidate();
 
-		return "redirect:index.jsp";
+		return "redirect:index2.jsp";
 	}
 
 	@RequestMapping("updateProfile")

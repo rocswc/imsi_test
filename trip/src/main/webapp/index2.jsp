@@ -570,7 +570,7 @@ body {
 		<!-- 로고 -->
 		<div class="logo">
 		<img class="logo-image" alt="로고이미지" src="">
-			<h1><a href="index.jsp">동틀무렵</a></h1>
+			<h1><a href="index2.jsp">동틀무렵</a></h1>
 		</div>
 				
 		<!-- 로그인/회원가입 버튼 - 우상단 -->
@@ -598,7 +598,7 @@ body {
 					<li><a href="game">대회정보</a></li>
 					<li><a href="hotspot">주변명소</a></li>
 					<li><a href="board">커뮤니티</a></li>
-					<li><a href="NewFile222">마이페이지</a></li>
+					<li><a href="bookmark">마이페이지</a></li>
 				</ul>
 			</div>
 		</div>
@@ -615,6 +615,7 @@ body {
 					<div class="slide-content">
 						<h2>서울 숲 힐링 산책로</h2>
 						<p>도심 속 자연을 느낄 수 있는 서울 숲의 아름다운 산책로를 만나보세요.</p>
+						 <a href="chatbot" class="btn-link">무엇이든 물어보살</a>
 					</div>
 				</div>
 				<div class="slide"
