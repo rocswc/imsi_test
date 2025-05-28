@@ -14,4 +14,7 @@ public class HotspotVO {
 	String	hotspot_date;
 	double	hotspot_latitude;
 	double	hotspot_longitude;
+	private Double user_lat;
+	private Double user_lon;
+	private Double distance;
 }

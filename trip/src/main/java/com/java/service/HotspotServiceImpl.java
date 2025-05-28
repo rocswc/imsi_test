@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.java.dao.HotspotDAO;
 
 import com.java.vo.HotspotVO;
+import com.java.vo.WalkingVO;
   
 
 @Service("hotspotService")
@@ -28,7 +29,11 @@ public class HotspotServiceImpl implements HotspotService{
 	}
 	
 
-
+public List<HotspotVO> recommendCourses(HotspotVO vo ){
+		
+		
+		return hotspotDAO.recommendCourses(vo);  
+	}
 	
 
 }

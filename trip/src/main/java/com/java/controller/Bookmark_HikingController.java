@@ -22,7 +22,7 @@ public class Bookmark_HikingController {
 	@RequestMapping("bookmark_hiking")
 	public void bookmark_hiking() {} 
 	
-	@GetMapping("bookmarkhiking") // HTTP GET방식 요청 중 URL 경로가 /hikingMap 인 요청을 처리
+	@GetMapping({"bookmarkhiking", "bookmark_hiking"}) // HTTP GET방식 요청 중 URL 경로가 /hikingMap 인 요청을 처리
 	@ResponseBody //반환값을 JSON 같은 형태로 바로 HTTP 응답 본문에 담아서 보내겠다
 	 public Map<String,Object> getbookmarkhiking(Bookmark_hikingVO vo,HttpSession session){
 		 HumanVO user = (HumanVO) session.getAttribute("loginUser");

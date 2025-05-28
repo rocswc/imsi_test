@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.java.dao.HikingDAO;
 import com.java.vo.HikingVO;
+import com.java.vo.RunningVO;
 
 
 @Service("hikingService")
@@ -25,6 +26,11 @@ public class HikingServiceImpl implements HikingService{
 		
 		
 		return hikingDAO.getList(); 
+	}
+public List<HikingVO> recommendCourses(HikingVO vo ){
+		
+		
+		return hikingDAO.recommendCourses(vo);  
 	}
 	
 }

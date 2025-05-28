@@ -74,7 +74,7 @@ public class DeepLTranslatorController {
 
 	    try {
 	        result.put("hotspot_name", translator.translateText(vo.getHotspot_name(), "KO", "en-US").getText());
-	        result.put("hotspot_distance", vo.getHotspot_distance());    // 숫자는 번역 안 함
+	           // 숫자는 번역 안 함
 	        result.put("hotspot_info", translator.translateText(vo.getHotspot_info(), "KO", "en-US").getText());
 	    } catch (Exception e) {
 	        e.printStackTrace();

@@ -31,4 +31,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM hiking
 	</select>
 
+
+	<select id="recommendCourses" resultType="com.java.vo.HikingVO">
+	SELECT *
+	FROM (
+	SELECT
+	hiking_id,
+	hiking_name,
+	hiking_latitude,
+	hiking_longitude,
+	hiking_distance,
+	hiking_height,
+	hiking_info,
+	6371 * ACOS(
+		COS(#{user_lat} * ACOS(-1) / 180) *
+		COS(hiking_latitude * ACOS(-1) / 180) *
+		COS((hiking_longitude - #{user_lon}) * ACOS(-1) / 180) +
+		SIN(#{user_lat} * ACOS(-1) / 180) *
+		SIN(hiking_latitude * ACOS(-1) / 180)
+	) AS distance
+	FROM hiking
+	ORDER BY distance ASC
+	)
+	WHERE ROWNUM &lt;= 3
+</select>
 </mapper>

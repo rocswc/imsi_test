@@ -5,11 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.java.service.HotspotService;
 import com.java.vo.HotspotVO;
+import com.java.vo.RunningVO;
 
 
 @Controller
@@ -30,5 +33,16 @@ public class HotSpotController {
 		List<HotspotVO> result = hotspotservice.getNearbyCourses(vo);
 		// System.out.println(result.toString());
 		return result;
+	}
+	
+	
+	@PostMapping("recommendCourseHotspot")
+	@ResponseBody
+	public  List<HotspotVO> recommendCourses(@RequestBody HotspotVO vo){
+		
+		List<HotspotVO> result = hotspotservice.recommendCourses(vo);
+		
+		return result;
+		
 	}
 }

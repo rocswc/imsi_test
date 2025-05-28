@@ -598,7 +598,7 @@ body {
 					<li><a href="game">대회정보</a></li>
 					<li><a href="hotspot">주변명소</a></li>
 					<li><a href="board">커뮤니티</a></li>
-					<li><a href="bookmark_walking">마이페이지</a></li>
+					<li><a href="NewFile222">마이페이지</a></li>
 				</ul>
 			</div>
 		</div>

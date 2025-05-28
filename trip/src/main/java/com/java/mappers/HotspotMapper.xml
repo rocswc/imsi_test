@@ -25,6 +25,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM hotspot
 	</select>
     
-    
+    <select id="recommendCourses" resultType="com.java.vo.HotspotVO">
+	SELECT *
+	FROM (
+	SELECT
+	hotspot_id,
+	hotspot_name,
+	hotspot_latitude,
+	hotspot_longitude,
+	hotspot_info,
+	6371 * ACOS(
+		COS(#{user_lat} * ACOS(-1) / 180) *
+		COS(hotspot_latitude * ACOS(-1) / 180) *
+		COS((hotspot_longitude - #{user_lon}) * ACOS(-1) / 180) +
+		SIN(#{user_lat} * ACOS(-1) / 180) *
+		SIN(hotspot_latitude * ACOS(-1) / 180)
+	) AS distance
+	FROM hotspot
+	ORDER BY distance ASC
+	)
+	WHERE ROWNUM &lt;= 3
+</select>
     
 </mapper>

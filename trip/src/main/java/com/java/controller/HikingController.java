@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.java.service.HikingService;
 import com.java.vo.HikingVO;
+import com.java.vo.RunningVO;
 
 
 
@@ -40,4 +41,14 @@ public class HikingController {
 	    return "ok"; 
 	}
 
+	
+	@PostMapping("recommendCourseHiking")
+	@ResponseBody
+	public  List<HikingVO> recommendCourses(@RequestBody HikingVO vo){
+		
+		List<HikingVO> result = hikingService.recommendCourses(vo);
+		
+		return result;
+		
+	}
 }

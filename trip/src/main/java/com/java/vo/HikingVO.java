@@ -14,4 +14,7 @@ public class HikingVO {
 	double	hiking_latitude;
 	double	hiking_longitude;
 	Integer	hiking_cnt;
+	private Double user_lat;
+	private Double user_lon;
+	private Double distance;
 }
