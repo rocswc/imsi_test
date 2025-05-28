@@ -1,0 +1,163 @@
+package com.java.controller;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.java.service.BoardService;
+import com.java.vo.BoardVO;
+import com.java.vo.HumanVO;
+
+@Controller
+public class BoardController {
+	@Autowired
+	private BoardService boardservice;
+	
+	//게시판 목록
+	@GetMapping("board")
+	public String boardList(Model m) {
+		List<BoardVO> boardList = boardservice.boardList();
+		m.addAttribute("boardList", boardList);
+		
+	    // 파일명, 리얼파일명 콘솔 출력
+	    for (BoardVO board : boardList) {
+	        System.out.println("게시글 ID: " + board.getBoard_id());
+	        System.out.println("파일명: " + board.getBoard_fname());
+	        System.out.println("리얼파일명: " + board.getBoard_realfname());
+	        System.out.println("댓글수:" + board.getReply_count());
+	        System.out.println("좋아요수:" + board.getLike_count());
+	    }
+	    
+		return "board";
+	}
+	
+	
+	//게시글 작성페이지
+	@GetMapping("boardInsert")
+	public String boardForm(HttpSession session) {
+		
+		HumanVO loginUser = (HumanVO) session.getAttribute("loginUser");
+		if( loginUser == null ) {
+			return "getHuman";
+		}
+	    return "board_insert";
+	}
+	
+	
+	//게시글 등록 & 좋아요테이블 생성
+	@PostMapping("boardRegister")
+	public String insertBoard(BoardVO vo, MultipartFile file, HttpServletRequest request) {		
+		System.out.println(vo.toString());
+		
+		// 경로 가져오기
+		String uploadPath = request.getSession().getServletContext().getRealPath("/resources/upload/");
+		
+		if (!file.isEmpty()) {
+			String getOriginalFilename = file.getOriginalFilename();
+			long getSize = file.getSize();
+			System.out.println(uploadPath);
+			UUID realfname = UUID.randomUUID();
+		
+			vo.setBoard_fname(getOriginalFilename);
+			vo.setBoard_fsize(getSize);
+			vo.setBoard_realfname(realfname.toString());
+		
+			File f = new File("D:\\trip\\trip\\src\\main\\webapp\\resources\\images\\"+realfname + "_" + getOriginalFilename);
+			//File f = new File(uploadPath + realfname + "_" + getOriginalFilename);
+			
+			try {
+				file.transferTo(f);
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		boardservice.insertBoard(vo);
+		return "redirect:/board";
+	}
+	
+	//게시글 보기
+	@GetMapping("getBoard")
+	public String getBoard(@RequestParam Integer board_id, Model m, HttpSession session) {
+		BoardVO result = boardservice.getBoard(board_id);
+		
+		System.out.println("파일명: " + result.getBoard_fname());
+	    System.out.println("리얼파일명: " + result.getBoard_realfname());
+		
+		m.addAttribute("board", result);
+		
+		HumanVO loginUser = (HumanVO) session.getAttribute("loginUser");
+		if( loginUser == null ) {
+			return "getHuman";
+		}
+		
+		return "board_detail";
+	}
+		
+	//좋아요 수
+	@GetMapping("likeCount")
+	@ResponseBody
+	public int countLike(Integer board_id) {
+		return boardservice.countLike(board_id);
+	}
+	
+	// 좋아요 추가
+	@GetMapping("addLike")
+	@ResponseBody
+	public String addLike(@RequestParam Integer board_id, HttpSession session) {
+		HumanVO human_id = (HumanVO) session.getAttribute("loginUser");
+	    
+	    if (human_id == null) {
+	        return "not_logged_in";
+	    }
+	    
+	    // 이미 좋아요 눌렀는지 확인
+	    if (boardservice.isLikedByUser(board_id, human_id)) {
+	        return "already_liked";
+	    }
+	    
+	    // 좋아요 추가
+	    boardservice.addLike(board_id, human_id);
+	    return "liked";
+	}
+	
+	
+	// 좋아요 감소
+	@GetMapping("unLike")
+	@ResponseBody
+	public void unLike(Integer board_id) {
+		boardservice.unLike(board_id);
+	}
+	
+	
+	// 게시글 수정
+	@PostMapping("modifyBoard")
+	@ResponseBody
+	public void modifyBoard(BoardVO vo){
+		System.out.println(vo.toString());
+		boardservice.modifyBoard(vo);
+	}
+	
+	
+	// 게시글 삭제(+ 댓글DB, 좋아요DB 같이 삭제)
+	@DeleteMapping("deleteBoard")
+	@ResponseBody
+	public void deleteBoard(Integer board_id){
+		boardservice.deleteBoard(board_id);
+	}
+}

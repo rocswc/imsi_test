@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.dao.ReplyDAO">
+
+	<!-- 댓글작성 -->
+	<insert id="insertReply" parameterType="com.java.vo.ReplyVO">
+		INSERT INTO reply(reply_id, board_id, reply_content, reply_writer, reply_date)
+		VALUES(reply_seq.nextval, #{board_id}, #{reply_content}, #{reply_writer}, sysdate)
+	</insert>
+
+	
+	<!-- 댓글목록 -->
+	<select id="listReply" parameterType="int" resultType="com.java.vo.ReplyVO">
+		SELECT reply_id, board_id, reply_writer, reply_content, reply_date
+		FROM reply
+		WHERE board_id = #{board_id}
+		ORDER BY reply_date
+	</select>
+	
+	
+	<!-- 댓글삭제 -->
+	<delete id="deleteReply" parameterType="int" >
+		DELETE FROM reply WHERE reply_id = #{reply_id}
+	</delete>
+	
+	
+	<!-- 댓글수정 -->
+	<update id="modifyReply" parameterType="com.java.vo.ReplyVO" >
+		UPDATE	reply
+		SET		reply_content	= #{reply_content}
+		WHERE	reply_writer	= #{reply_writer} AND
+				reply_id		= #{reply_id}
+	</update>
+	
+	
+	<!-- 댓글개수 -->
+	<select id="countReply" parameterType="int" resultType="int">
+		SELECT	COUNT(*)
+		FROM	reply
+		WHERE	board_id = #{board_id}
+	</select>
+	
+	<update id="updateBoardReplyCount">
+		UPDATE	board
+		SET		reply_count = #{reply_count}
+		WHERE	board_id = #{board_id}
+	</update>
+	
+	
+</mapper>
