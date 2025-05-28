@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.dao.QnADAO">
+
+	<select id="getQnAList" resultType="com.java.vo.QnABoardVO">
+		SELECT *
+	    FROM QNA_BOARD
+	    WHERE HUMAN_ID = #{human_id}   
+		<if test="board_id != null">
+		AND board_id = #{board_id}
+		</if>
+		ORDER BY BOARD_ID DESC
+    </select>
+   
+   	<insert id="qnaBoardRegister" parameterType="com.java.vo.QnABoardVO">
+		INSERT INTO QNA_BOARD
+		VALUES(QNA_BOARD_SEQ.NEXTVAL,#{human_id},#{board_title},#{board_content},SYSDATE,'대기')
+	</insert>
+    
+    <select id="getQnAReplyList" resultType="com.java.vo.QnABoardReplyVO">
+		SELECT REPLY_ID, REPLY_CONTENT, REPLY_DATE, WRITER_TYPE, WRITER_ID,B.BOARD_ID
+		FROM QNA_BOARD B
+		JOIN QNA_BOARD_REPLY R ON B.BOARD_ID = R.BOARD_ID
+		WHERE B.HUMAN_ID = #{human_id} AND B.BOARD_ID = #{board_id}
+		ORDER BY B.BOARD_ID DESC, R.REPLY_DATE ASC
+    </select>
+    
+    <insert id="qnaBoardReplyRegister" parameterType="com.java.vo.QnABoardReplyVO">
+		INSERT INTO QNA_BOARD_REPLY
+		VALUES(BOARD_REPLY_SEQ.NEXTVAL,#{board_id},#{writer_id},#{writer_type},#{reply_content},SYSDATE)
+	</insert>
+
+	<delete id='qnaDeleteReply' parameterType='int'>
+		DELETE FROM QNA_BOARD_REPLY WHERE reply_id=#{reply_id}
+	</delete>
+
+</mapper>

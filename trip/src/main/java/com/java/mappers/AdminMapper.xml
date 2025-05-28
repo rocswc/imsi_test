@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AdminMapper">
+	
+	<select id='getAdminDashBoard' resultType='com.java.vo.AdminDashBoardVO'>
+		SELECT
+		    COUNT(*) AS totalMembers,
+		    SUM(CASE WHEN human_state = 'normal' THEN 1 ELSE 0 END) AS activeMembers,
+		    SUM(CASE WHEN TO_CHAR(TO_DATE(human_join, 'YYYY-MM-DD'), 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD') THEN 1 ELSE 0 END) AS todayJoinedMembers,
+		    SUM(CASE WHEN TO_CHAR(TO_DATE(human_join, 'YYYY-MM-DD'), 'YYYY-MM') = TO_CHAR(SYSDATE, 'YYYY-MM') THEN 1 ELSE 0 END) AS monthJoinedMembers,
+		    SUM(CASE WHEN human_state = 'rest' THEN 1 ELSE 0 END) AS dormantMembers,
+		    SUM(CASE WHEN human_state = 'delete' THEN 1 ELSE 0 END) AS withdrawnMember
+		FROM HUMAN
+	</select>
+	   
+	<select id='getActivitySummary' resultType='com.java.vo.ActivitySummaryVO'>
+		SELECT
+		    (SELECT SUM(HIKING_CNT) FROM HIKING) AS TOTAL_HIKING_CNT,
+		    (SELECT SUM(RUNNING_CNT) FROM RUNNING) AS TOTAL_RUNNING_CNT,
+		    (SELECT SUM(WALKING_CNT) FROM WALKING) AS TOTAL_WALKING_CNT
+		FROM DUAL
+	</select>
+	 
+	 <select id='getHikingLevelChartList' resultType='com.java.vo.HikingLevelChartVO'>
+		SELECT 
+		  HIKING_LEVEL, 
+		  COUNT(*) AS HIKING_COUNT
+		FROM 
+		  HIKING
+		GROUP BY 
+		  HIKING_LEVEL
+		ORDER BY 
+		  CASE HIKING_LEVEL
+		    WHEN '상' THEN 1
+		    WHEN '중' THEN 2
+		    WHEN '하' THEN 3
+		    ELSE 4
+		  END
+	</select>
+	 
+	<select id='getMemberChartList' resultType='com.java.vo.MemberChartVO'>
+		SELECT TO_CHAR(TO_DATE(human_join, 'YYYY-MM-DD'), 'YYYY-MM') AS join_mouth, COUNT(*) AS join_count
+		FROM HUMAN
+		WHERE human_join IS NOT NULL
+		GROUP BY TO_CHAR(TO_DATE(human_join, 'YYYY-MM-DD'), 'YYYY-MM')
+		ORDER BY join_mouth
+	</select>
+	  			
+	<select id='getAdminHumanList' resultType='com.java.vo.HumanVO'>
+		SELECT * FROM human
+		<where>
+			<if test="searchOption != null">
+				${searchOption} like '%'||#{keyword}||'%'
+			</if>
+		</where>
+	</select>
+	
+	<select id='getAdminHuman' resultType='com.java.vo.HumanVO'>
+		SELECT * FROM human WHERE human_id = #{id}
+	</select>
+	
+	<select id='updateAdminHuman' resultType='com.java.vo.HumanVO'>
+		update human 
+		set human_blacklist = #{human_blacklist},human_state = #{human_state}
+		WHERE human_id = #{human_id}
+	</select>
+	
+	<select id='deleteAdminHuman' resultType='com.java.vo.HumanVO'>
+		update human set human_state = 'delete' WHERE human_id = #{human_id}
+	</select>
+	
+	<select id='updateProfile' resultType='com.java.vo.HumanVO'>
+		update human 
+		set human_pass = #{human_pass}, human_hint = #{human_hint}, human_passhint = #{human_passhint}
+		WHERE human_id = #{human_id}
+	</select>
+	
+</mapper>
