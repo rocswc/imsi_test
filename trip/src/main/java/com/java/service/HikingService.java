@@ -6,4 +6,5 @@ import com.java.vo.HikingVO;
 public interface HikingService {
 	public List<HikingVO> getNearbyCourses(HikingVO vo);
 	public void insertHiking(HikingVO vo);
+	public  List<HikingVO> getList();
 }

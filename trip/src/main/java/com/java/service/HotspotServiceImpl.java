@@ -22,7 +22,10 @@ public class HotspotServiceImpl implements HotspotService{
 		System.out.println("service출력");
 		return hotspotDAO.getNearbyCourses(vo);
 	}
-	
+	public  List<HotspotVO> getList(){
+		
+		return hotspotDAO.getList();
+	}
 	
 
 

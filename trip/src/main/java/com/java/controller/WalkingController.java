@@ -1,10 +1,10 @@
 package com.java.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,7 +27,7 @@ public class WalkingController {
 	
 	@GetMapping("walkingMap") // HTTP GET방식 요청 중 URL 경로가 /walkingMap 인 요청을 처리
 	@ResponseBody //반환값을 JSON 같은 형태로 바로 HTTP 응답 본문에 담아서 보내겠다
-	 public List<WalkingVO> getNearbyCourses(WalkingVO vo,Model m) {
+	 public List<WalkingVO> getNearbyCourses(WalkingVO vo) {
 		// System.out.println(vo.toString());
 		List<WalkingVO> result = walkingservice.getNearbyCourses(vo);
 		
@@ -41,5 +41,16 @@ public class WalkingController {
 	public String insertWalking(@RequestBody WalkingVO vo) {
 		walkingservice.insertWalking(vo);
 	    return "ok";
+	}
+	
+	 
+	@PostMapping("recommendCourse")
+	@ResponseBody
+	public  List<WalkingVO> recommendCourses(@RequestBody WalkingVO vo){
+		
+		List<WalkingVO> result = walkingservice.recommendCourses(vo);
+		
+		return result;
+		
 	}
 }

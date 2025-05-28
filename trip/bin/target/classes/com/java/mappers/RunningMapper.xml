@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.dao.RunningDAO">
+
+	<select id="getNearbyCourses" resultType="com.java.vo.RunningVO">
+		SELECT *
+	    FROM RUNNING
+	    WHERE
+	        111.045 * (
+            	ACOS(
+	                COS(#{running_latitude} * (ACOS(-1) / 180))
+	                * COS(RUNNING_LATITUDE * (ACOS(-1) / 180))
+	                * COS((RUNNING_LONGITUDE - #{running_longitude}) * (ACOS(-1) / 180))
+	                + SIN(#{running_latitude} * (ACOS(-1) / 180))
+	                * SIN(RUNNING_LATITUDE * (ACOS(-1) / 180))
+      	      )
+       		 ) * (180 / ACOS(-1)) &lt;= 50
+    </select>
+    
+    
+    <update id="insertRunning"
+	parameterType="com.java.vo.RunningVO">
+	UPDATE running
+	SET running_cnt = running_cnt+1
+	WHERE running_id = #{running_id ,jdbcType=INTEGER}
+
+	</update>
+	
+	<select id="getList" resultType="com.java.vo.RunningVO">
+		SELECT * FROM running
+	</select>
+
+	
+
+</mapper>

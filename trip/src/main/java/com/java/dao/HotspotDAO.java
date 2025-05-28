@@ -12,4 +12,5 @@ import com.java.vo.HotspotVO;
 public interface HotspotDAO {
 
 	public List<HotspotVO> getNearbyCourses(HotspotVO vo);
+	List<HotspotVO> getList();
 }

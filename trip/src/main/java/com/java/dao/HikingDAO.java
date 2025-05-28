@@ -12,4 +12,5 @@ import com.java.vo.HikingVO;
 public interface HikingDAO {
 	public List<HikingVO> getNearbyCourses(HikingVO vo);
 	void insertHiking(HikingVO vo);
+	List<HikingVO> getList();
 }

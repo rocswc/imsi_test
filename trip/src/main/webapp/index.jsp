@@ -117,6 +117,15 @@ body {
   transition: all 0.3s;
 }
 
+.auth-buttons p {
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
 .login-btn {
   background-color: #FFFFFA;
   color: #156206;
@@ -323,7 +332,7 @@ body {
 			<!-- 중앙 메뉴 -->
 			<div class="nav-menu">
 				<ul>
-					<li><a href="walking">산책코스</a></li>
+					<li><a href="walking_redesign">산책코스</a></li>
 					<li><a href="running">러닝코스</a></li>
 					<li><a href="hiking">등산코스</a></li>
 					<li><a href="game">대회정보</a></li>

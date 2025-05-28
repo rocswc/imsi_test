@@ -300,6 +300,7 @@ body {
       <div class="info-item">
         <label for="course-info">코스정보</label>
         <div id="course-info"></div>
+        <button id="translate-btn" style="margin-left: 10px;">번역하기</button>
       </div>
     </div>
   </div>
@@ -390,34 +391,51 @@ body {
   	 	});
   	 
 
-  	 	$("#bookmark-btn").click(function () {
-  	 		alert("하이")
-    	 	  const courseName = $("#course-name").val();
-			console.log($("#hiking-id").val())
-			console.log($("#course-name").val())
-    	 	  if (!courseName) {
-    	 	    alert("먼저 코스를 선택하세요!");
-    	 	    return;
-    	 	  }
-
-    	 	  const courseData = {
-					hiking_id: $("#hiking-id").val(),
-					hiking_name: $("#course-name").val(), 
+  		$("#translate-btn").click(function () {
+  	  	 	
+    	 	  const param = {
+    	 			 hiking_id: parseInt($("#hiking-id").val()),
+    	 			hiking_name: $("#course-name").val(),
+    	 	       hiking_distance: $("#course-distance").val(),
+    	 	      hiking_info: $("#course-info").text(),
+    	 	     
     	 	  };
+    	 	 console.log("보내는 값:", param); 
 
     	 	  $.ajax({
     	 	    type: "POST",
-    	 	    url: "addbookmarkhiking",
+    	 	    url: "/controller/translatehiking",
     	 	    contentType: "application/json",
-    	 	    data: JSON.stringify(courseData),
-    	 	    success: function (res) {
-    	 	      if (res.status === "success") {
-    	 	        alert("북마크에 저장되었습니다!");
-    	 	        $("#bookmark-btn").text("북마크⭐"); // 텍스트만 변경
-    	 	      }
+    	 	    data: JSON.stringify(param),
+    	 	    success: function (data) {
+    	 	      // 예: 번역된 코스를 콘솔에 출력 (또는 변수 처리)
+    	 	     $("#course-name").val(data.hiking_name);
+               $("#course-distance").val(data.hiking_distance);
+               $("#course-info").text(data.hiking_info);
+               
+             
+               
+               $("label[for='course-name']").text("Course");
+               $("label[for='course-distance']").text("Distance");
+               $("label[for='my-location']").text("My Location");
+               $("label[for='course-info']").text("Course Info");
+               $("label[for='course-height']").text("Height");
+               $(".course-header h3").text("Hiking Course");
+               $("#bookmark-btn").text("Bookmark");
+               $(".logo h1 a").text("Dawn Walk");
+               $(".nav-menu ul li:nth-child(1) a").text("Walking");
+               $(".nav-menu ul li:nth-child(2) a").text("Running");
+               $(".nav-menu ul li:nth-child(3) a").text("Hiking");
+               $(".nav-menu ul li:nth-child(4) a").text("Events");
+               $(".nav-menu ul li:nth-child(5) a").text("Hotspots");
+               $(".nav-menu ul li:nth-child(6) a").text("Community");
+               $(".nav-menu ul li:nth-child(7) a").text("My Page");
+               $(".login-btn").text("Logout");
+    	 	      console.log("번역 결과:", data);
+    	 	   $("#course-info").text(data.walking_info);
     	 	    },
     	 	    error: function () {
-    	 	      alert("북마크 저장 실패");
+    	 	      alert("번역 실패");
     	 	    }
     	 	  });
     	 	});

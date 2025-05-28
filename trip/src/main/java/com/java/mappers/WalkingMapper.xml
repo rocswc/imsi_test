@@ -20,10 +20,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        		 ) * (180 / ACOS(-1)) &lt;= 5
     </select>
     
-    <update id="insertWalking" parameterType="com.java.vo.WalkingVO">
-    	UPDATE walking  
-      	SET walking_cnt = walking_cnt+1		
-    	WHERE walking_id = #{walking_id ,jdbcType=INTEGER}
     
-</update>
+    
+    
+	<select id="recommendCourses" resultType="com.java.vo.WalkingVO">
+	SELECT *
+	FROM (
+	SELECT
+	walking_id,
+	walking_name,
+	walking_name2,
+	walking_latitude,
+	walking_longitude,
+	walking_distance,
+	walking_info,
+	6371 * ACOS(
+		COS(#{user_lat} * ACOS(-1) / 180) *
+		COS(walking_latitude * ACOS(-1) / 180) *
+		COS((walking_longitude - #{user_lon}) * ACOS(-1) / 180) +
+		SIN(#{user_lat} * ACOS(-1) / 180) *
+		SIN(walking_latitude * ACOS(-1) / 180)
+	) AS distance
+	FROM walking
+	ORDER BY distance ASC
+	)
+	WHERE ROWNUM &lt;= 3
+</select>
+
+	<update id="insertWalking" parameterType="com.java.vo.WalkingVO">
+		UPDATE walking
+		SET walking_cnt = walking_cnt+1
+		WHERE walking_id = #{walking_id ,jdbcType=INTEGER}
+
+	</update>
+
+
+	<select id="getList" resultType="com.java.vo.WalkingVO">
+		SELECT * FROM walking
+	</select>
 </mapper>

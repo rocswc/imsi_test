@@ -13,4 +13,7 @@ public class WalkingVO {
 	private double	walking_latitude;
 	private double	walking_longitude;
 	Integer	walking_cnt;
+	private Double user_lat;
+	private Double user_lon;
+	private Double distance;
 }

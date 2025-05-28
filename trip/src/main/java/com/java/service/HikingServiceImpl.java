@@ -20,4 +20,11 @@ public class HikingServiceImpl implements HikingService{
 	}
 	
 	public void insertHiking(HikingVO vo) {hikingDAO.insertHiking(vo);}
+	
+	public List<HikingVO> getList(){
+		
+		
+		return hikingDAO.getList(); 
+	}
+	
 }

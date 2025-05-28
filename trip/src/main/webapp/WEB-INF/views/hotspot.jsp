@@ -270,6 +270,7 @@ body {
     
     </div>
     <div class="info-form">
+    <input type="hidden" id="walking-id">
       <div class="info-item">
         <label for="my-location">내위치</label>
         <div id="map"></div>
@@ -288,6 +289,7 @@ body {
 
       <div class="info-item">
         <label for="course-info">명소정보</label>
+         <button id="translate-btn" style="margin-left: 10px;">번역하기</button>
         <div id="course-info"></div>
         
       </div>
@@ -363,6 +365,50 @@ body {
   	 			$btn.text("북마크");
   	 		}
   	 	});
+  	 	
+  		$("#translate-btn").click(function () {
+  	  	 	
+    	 	  const param = {
+    	 			 hotspot_id: parseInt($("#walking-id").val()),
+    	 			hotspot_name: $("#course-name").val(),
+    	 	       hotspot_info: $("#course-info").text()
+    	 	  };
+    	 	 console.log("보내는 값:", param); 
+
+    	 	  $.ajax({
+    	 	    type: "POST",
+    	 	    url: "/controller/translatehotspot",
+    	 	    contentType: "application/json",
+    	 	    data: JSON.stringify(param),
+    	 	    success: function (data) {
+    	 	      // 예: 번역된 코스를 콘솔에 출력 (또는 변수 처리)
+    	 	     $("#course-name").val(data.hotspot_name);
+               $("#course-info").text(data.hotspot_info);
+               
+               
+               $("label[for='course-name']").text("Course");
+               $("label[for='course-distance']").text("Distance");
+               $("label[for='my-location']").text("My Location");
+               $("label[for='course-info']").text("Course Info");
+               $(".course-header h3").text("Attraction");
+               $("#bookmark-btn").text("Bookmark");
+               $(".logo h1 a").text("Dawn Walk");
+               $(".nav-menu ul li:nth-child(1) a").text("Walking");
+               $(".nav-menu ul li:nth-child(2) a").text("Running");
+               $(".nav-menu ul li:nth-child(3) a").text("Hiking");
+               $(".nav-menu ul li:nth-child(4) a").text("Events");
+               $(".nav-menu ul li:nth-child(5) a").text("Hotspots");
+               $(".nav-menu ul li:nth-child(6) a").text("Community");
+               $(".nav-menu ul li:nth-child(7) a").text("My Page");
+               $(".login-btn").text("Logout");
+    	 	      console.log("번역 결과:", data);
+    	 	   $("#course-info").text(data.hotspot_info);
+    	 	    },
+    	 	    error: function () {
+    	 	      alert("번역 실패");
+    	 	    }
+    	 	  });
+    	 	});
   	 	
 	</script>
     

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.java.dao.RunningDAO;
 
 import com.java.vo.RunningVO;
+import com.java.vo.WalkingVO;
 
 
 @Service("runningService")
@@ -22,4 +23,16 @@ public class RunningServiceImpl implements RunningService{
 	}
 	
 	public void insertRunning(RunningVO vo) {runningdao.insertRunning(vo);}
+	
+	public List<RunningVO> getList(){
+		
+		return runningdao.getList();
+	}
+	
+public List<RunningVO> recommendCourses(RunningVO vo ){
+		
+		
+		return runningdao.recommendCourses(vo);  
+	}
 }
+  

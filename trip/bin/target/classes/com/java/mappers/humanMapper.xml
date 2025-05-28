@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.dao.HumanDAO">
+
+	
+	<!--   회원가입	 -->	
+	<insert id="insertHuman" parameterType="com.java.vo.HumanVO">
+		INSERT INTO human (human_id , human_pass , human_name , human_birth , human_gender , human_tel ,human_email,human_hint ,human_passhint ,human_join,human_blacklist,human_state,human_seq)
+		VALUES(#{human_id}, #{human_pass}, #{human_name} , TO_DATE(#{human_birth, jdbcType=VARCHAR}, 'YYMMDD')  , #{human_gender}, #{human_tel} , #{human_email}, #{human_hint}, #{human_passhint},sysdate,'N','normal', human_seq.nextval)
+	</insert>
+	
+	<select id="getHuman" parameterType="com.java.vo.HumanVO" resultType="com.java.vo.HumanVO"> 
+		SELECT human_id,human_pass
+		FROM human
+		WHERE human_id = #{human_id, jdbcType=VARCHAR} and human_pass = #{human_pass, jdbcType=VARCHAR}
+	</select>
+	
+	<select id="getCheckId" parameterType="com.java.vo.HumanVO" resultType="com.java.vo.HumanVO"> 
+		SELECT human_id
+		FROM human
+		WHERE human_id = #{human_id, jdbcType=VARCHAR}
+	</select>
+	
+	
+	<select id="getHumanId" parameterType="com.java.vo.HumanVO" resultType="com.java.vo.HumanVO">
+		SELECT human_id, human_name, human_email
+		FROM human
+		WHERE human_name = #{human_name, jdbcType=VARCHAR} AND human_email = #{human_email, jdbcType=VARCHAR}
+	</select>
+	
+	<insert id="insertKakaoUser" parameterType="com.java.vo.HumanVO">
+	INSERT INTO human (
+		human_id, human_pass, human_name, human_birth,
+		human_join,
+		human_blacklist, human_state, human_seq
+	) VALUES (
+	#{human_id},
+	#{human_pass},
+	#{human_name},
+	TO_DATE(#{human_birth,
+	jdbcType=VARCHAR},
+	'YYMMDD'),
+	SYSDATE,
+	'N',
+	'normal',
+	human_seq.nextval
+	)
+	</insert>
+	
+	
+	<select id="getHumanPass" parameterType="com.java.vo.HumanVO" resultType="com.java.vo.HumanVO">
+		SELECT human_id, human_passhint
+		FROM human
+		WHERE human_id = #{human_id, jdbcType=VARCHAR}  AND human_passhint = #{human_passhint, jdbcType=VARCHAR} 
+	</select>	
+	
+	<update id="updatePass" parameterType="com.java.vo.HumanVO">
+		UPDATE human SET
+		human_pass = #{human_pass}
+		WHERE human_id = #{human_id}
+	</update>								
+
+<select id='updateProfile' resultType='com.java.vo.HumanVO'>
+		update human 
+		set human_pass = #{human_pass}, human_hint = #{human_hint}, human_passhint = #{human_passhint}, human_name = #{human_name}, human_tel = #{human_tel},human_email = #{human_email} 
+		WHERE human_id = #{human_id}
+</select>
+
+	
+	
+</mapper> 

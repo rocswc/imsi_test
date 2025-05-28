@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.java.service.RunningService;
 import com.java.vo.RunningVO;
+import com.java.vo.WalkingVO;
 
 
 @Controller
@@ -40,4 +41,15 @@ public class RunningController {
 		runningService.insertRunning(vo); 
 	    return "ok";
 	}
+	   
+	@PostMapping("recommendCourseRun")
+	@ResponseBody
+	public  List<RunningVO> recommendCourses(@RequestBody RunningVO vo){
+		
+		List<RunningVO> result = runningService.recommendCourses(vo);
+		
+		return result;
+		
+	}
+	
 }

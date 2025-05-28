@@ -21,10 +21,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     
-    <update id="insertRunning" parameterType="com.java.vo.RunningVO">
-    	UPDATE	running 
-      	SET running_cnt = running_cnt+1		
-    	WHERE running_id = #{running_id ,jdbcType=INTEGER}
-    
-</update>
+    <update id="insertRunning"
+	parameterType="com.java.vo.RunningVO">
+	UPDATE running
+	SET running_cnt = running_cnt+1
+	WHERE running_id = #{running_id ,jdbcType=INTEGER}
+
+	</update>
+	
+	<select id="getList" resultType="com.java.vo.RunningVO">
+		SELECT * FROM running
+	</select>
+	
+	<select id="recommendCourses" resultType="com.java.vo.RunningVO">
+	SELECT *
+	FROM (
+	SELECT
+	running_id,
+	running_name,
+	running_latitude,
+	running_longitude,
+	running_distance,
+	running_info,
+	6371 * ACOS(
+		COS(#{user_lat} * ACOS(-1) / 180) *
+		COS(running_latitude * ACOS(-1) / 180) *
+		COS((running_longitude - #{user_lon}) * ACOS(-1) / 180) +
+		SIN(#{user_lat} * ACOS(-1) / 180) *
+		SIN(running_latitude * ACOS(-1) / 180)
+	) AS distance
+	FROM running
+	ORDER BY distance ASC
+	)
+	WHERE ROWNUM &lt;= 3
+</select>
+	
+
 </mapper>

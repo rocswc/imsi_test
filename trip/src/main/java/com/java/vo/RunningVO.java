@@ -13,4 +13,7 @@ public class RunningVO {
 	String	running_date;
 	double	running_latitude;
 	double	running_longitude;
+	private Double user_lat;
+	private Double user_lon;
+	private Double distance;
 }

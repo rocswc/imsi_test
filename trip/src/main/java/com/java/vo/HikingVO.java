@@ -6,8 +6,8 @@ import lombok.Data;
 public class HikingVO {
 	Integer	hiking_id;
 	String	hiking_name;
-	Integer	hiking_distance;
-	Integer	hiking_height;
+	String	hiking_distance;
+	String	hiking_height;
 	String	hiking_level;
 	String	hiking_info;
 	String	hiking_date;

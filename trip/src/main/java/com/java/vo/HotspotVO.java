@@ -7,7 +7,7 @@ public class HotspotVO {
 	Integer	hotspot_id;
 	Integer	hotspot_cnt;
 	String	hotspot_name;
-	Integer	hotspot_distance;
+	String	hotspot_distance;
 	Integer	hotspot_height;
 	String	hotspot_level;
 	String	hotspot_info;

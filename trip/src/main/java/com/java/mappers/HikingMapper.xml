@@ -25,5 +25,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       	SET hiking_cnt = hiking_cnt+1		
     	WHERE hiking_id = #{hiking_id ,jdbcType=INTEGER}
 	</update>
-    
+
+
+	<select id="getList" resultType="com.java.vo.HikingVO">
+		SELECT * FROM hiking
+	</select>
+
 </mapper>
