@@ -26,46 +26,112 @@
 }
 
 body {
-   background-color: #FFFFFA;
+   width: 1600px;
+   background-color: #f8f9fa;
    min-height: 100vh;
+   line-height: 1.6;
+   margin: 0 auto;
 }
 
 /* 헤더 스타일 */
 .header {
-  width: 100%;
-  background-color: #FFFFFA;
-  padding: 20px 0 0;
-  border-bottom: 1px solid #eee;
+  background-color: #ffffff;
+  padding: 0;
+  border-bottom: none;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  position: relative;
 }
 
 /* 로고 스타일 */
+.logo-image {
+    position: absolute;
+    left: 40px;
+    top: 25px;
+    display: flex;
+    align-items: center;
+}
+
 .logo {
   text-align: center;
-  margin-bottom: 20px;
+  padding: 25px 0 20px;
+  background: #f8f9fa;
 }
 
 .logo h1 {
-  color: #156206;
-  font-size: 28px;
-  font-weight: 700;
+  color: #000000;
+  font-size: 23px;
+  font-weight: 900;
+  letter-spacing: -1px;
+}
+
+.logo h1 a {
+  text-decoration: none;
+  color: #000000;
+  transition: all 0.3s ease;
+}
+
+.logo h1 a:hover {
+  color: #666666;
+}
+
+/* 로그인/회원가입 버튼 - 우상단 고정 */
+.auth-buttons {
+  position: absolute;
+  right: 40px;
+  top: 25px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  z-index: 1001;
+}
+
+.auth-buttons p {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+.auth-buttons button {
+  padding: 12px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.login-btn {
+  background-color: transparent;
+  color: #191919;
+}
+
+.login-btn:hover {
+  background-color: transparent;
+  color: #555555;
+}
+
+.register-btn {
+  background-color: transparent;
+  color: #191919;
+}
+
+.register-btn:hover {
+  background: transparent;
+  color: #555555;
 }
 
 /* 네비게이션 컨테이너 */
 .nav-container {
-  /* max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  padding: 0 20px 15px;
-  align-items: center;
-  justify-content: space-between; */
-  
-   max-width: 100%;
+  max-width: 100%;
   width: 100%;
-  padding: 0 0 15px;
+  padding: 0 0 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
+  background: #f8f9fa;
 }
 
 /* 중앙 메뉴 */
@@ -77,75 +143,49 @@ body {
 .nav-menu ul {
   display: inline-flex;
   list-style: none;
-  gap: 24px;
+  gap: 40px;
 }
 
 .nav-menu ul li a {
   text-decoration: none;
-  color: #333;
-  font-weight: 500;
+  color: #333333;
+  font-weight: 600;
   font-size: 16px;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 8px 0;
 }
 
 .nav-menu ul li a:hover {
-  color: #156206;
+  color: #666666;
 }
 
-/* 로그인/회원가입 버튼 */
-.auth-buttons {
-  /* display: flex;
-  gap: 10px; */
+.nav-menu ul li a::after {
+  content: '';
   position: absolute;
-  right: 30px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  gap: 10px;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  background-color: #666666;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
 }
 
-.auth-buttons button {
-  padding: 8px 18px;
-  border-radius: 20px;
-  border: none;
-  cursor: pointer;
-  font-size: 14px;
-  transition: all 0.3s;
+.nav-menu ul li a:hover::after {
+  width: 100%;
 }
 
-.login-btn {
-  background-color: #FFFFFA;
-  color: #156206;
-  border: 1px solid #156206;
-}
-
-.register-btn {
-  background-color: #156206;
-  color: white;
-}
-
-.auth-buttons button:hover {
-  opacity: 0.9;
-  transform: translateY(-2px);
-}
 
 /* 정보 표시 영역 스타일 */
-.walking-course {
-    margin-top: 30px;
-    margin-bottom: 20px;
-    padding: 0 30px;
-}
-
-.walking-course h3 {
-    margin-bottom: 15px;
-    font-size: 18px;
-    color: #156206;
-}
 
 .course-header {
   display: flex;
   justify-content: center;  /* 수평 가운데 정렬 */
   align-items: center;
+  margin-top: 20px;
   margin-bottom: 20px;
+  padding: 20px;
 }
 .course-header table {
   margin: 0 auto;  /* 테이블도 수평 가운데 정렬 */
@@ -156,7 +196,30 @@ body {
 
 .course-header h3 {
     font-size: 18px;
-    color: #156206;
+    color: #333333;
+}
+
+/* 배너 이미지 스타일 */
+.banner-section {
+  width: 100%;
+  max-width: 1520px;
+  margin: 0 auto 40px auto;
+  padding: 0 40px;
+}
+
+.banner-image {
+  width: 100%;
+  height: 200px;
+  background: #156206;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(21, 98, 6, 0.2);
 }
 
 .info-form {
@@ -217,13 +280,6 @@ body {
 	border: none
 }
 
-
-
-
-
-
-
-
 .page-btn {
   padding: 6px 12px;
   margin: 0 3px;
@@ -238,20 +294,55 @@ body {
   background-color: #156206;
   color: #fff;
 }
-.game-item {
-  border: 1px solid #ddd;
-  padding: 15px;
-  margin-bottom: 15px;
-  border-radius: 8px;
-  background-color: #fff;
+
+/* 게임 리스트 그리드 스타일 */
+.game-list {
+  padding: 20px 40px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 1520px;
+  margin: 0 auto;
 }
 
-.game-list {
+.game-item {
+  border: 1px solid #ddd;
   padding: 20px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.game-item:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+.game-item h4 {
+  margin-bottom: 12px;
+  color: #156206;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.game-item p {
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.game-item p:last-child {
+  margin-bottom: 0;
 }
 
 .pagination {
-  margin: 10px 20px;
+  margin: 20px;
+  text-align: center;
 }
 
 .month-select {
@@ -267,12 +358,28 @@ body {
 </style>
 </head>
 <body>
+
+	<!-- 헤더 시작 -->
 	<header class="header">
+
 		<!-- 로고 -->
 		<div class="logo">
-			<h1>
-				<a href="index.jsp" style="text-decoration: none; color: #156206;">동틀무렵</a>
-			</h1>
+		<img class="logo-image" alt="로고이미지" src="">
+			<h1><a href="index.jsp">동틀무렵</a></h1>
+		</div>
+				
+		<!-- 로그인/회원가입 버튼 -->
+		<div class="auth-buttons">
+			<c:choose>
+				<c:when test="${not empty sessionScope.loginUser}">
+					<p>${sessionScope.loginUser.human_id}님 환영합니다!</p>
+					<button class="login-btn" onclick="location.href='logout'">로그아웃</button>
+				</c:when>
+				<c:otherwise>
+					<button class="login-btn" onclick="location.href='getHuman'">로그인</button>
+					<button class="register-btn" onclick="location.href='memberForm'">회원가입</button>
+				</c:otherwise>
+			</c:choose>
 		</div>
 
 		<!-- 네비게이션 -->
@@ -325,6 +432,16 @@ body {
       </div>
     </div>
 
+    <!-- 배너 이미지 -->
+    <div class="banner-section">
+      <div class="banner-image">
+      	<img alt="" src="../../resources/images/main_image1.jpg">
+        <div>
+          🏃‍♂️ 다양한 대회에 참여하고 건강한 라이프스타일을 만들어보세요! 🏃‍♀️
+        </div>
+      </div>
+    </div>
+
     <!-- 게임 리스트 -->
   <div id="game-list" class="game-list"></div>
 
@@ -344,7 +461,7 @@ body {
 	});
 
 	function loadGameList(month, page) {
-	  var size = 4;
+	  var size = 6;
 
 	  $.ajax({
 	    type: "GET",
@@ -376,13 +493,15 @@ body {
 
 	  for (var i = 0; i < list.length; i++) {
 	    var game = list[i];
-	    var item = '<div class="game-item">'
+	    // 대회 링크 URL 생성 (game_link 필드가 있다고 가정)
+	    var gameLink = game.game_link || 'http://www.marathon.pe.kr/index_calendar.html';
+	    var item = '<a href="' + gameLink + '" class="game-item" target="_blank">'
 	      + '<h4>📌 ' + game.game_name + '</h4>'
 	      + '<p><strong>날짜:</strong> ' + game.game_date + '</p>'
 	      + '<p><strong>장소:</strong> ' + game.game_place + '</p>'
 	      + '<p><strong>주최:</strong> ' + game.game_main + '</p>'
 	      + '<p><strong>종목:</strong> ' + game.game_type + '</p>'
-	      + '</div>';
+	      + '</a>';
 	    $("#game-list").append(item);
 	  }
 	}
