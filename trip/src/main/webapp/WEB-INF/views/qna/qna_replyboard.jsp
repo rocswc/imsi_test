@@ -595,13 +595,13 @@ body {
 			<!-- 중앙 메뉴 -->
 			<div class="nav-menu">
 				<ul>
-					<li><a href="walking">산책코스</a></li>
-					<li><a href="running">러닝코스</a></li>
-					<li><a href="hiking">등산코스</a></li>
-					<li><a href="game">대회정보</a></li>
-					<li><a href="hotspot">주변명소</a></li>
-					<li><a href="board">커뮤니티</a></li>
-					<li><a href="bookmark_walking">마이페이지</a></li>
+					<li><a href="/controller/walking">산책코스</a></li>
+					<li><a href="/controller/running">러닝코스</a></li>
+					<li><a href="/controller/hiking">등산코스</a></li>
+					<li><a href="/controller/game">대회정보</a></li>
+					<li><a href="/controller/hotspot">주변명소</a></li>
+					<li><a href="/controller/board">커뮤니티</a></li>
+					<li><a href="/controller/bookmark_walking">마이페이지</a></li>
 				</ul>
 			</div>
 		</div>

@@ -339,6 +339,7 @@ body {
 					<li><a href="hotspot">주변명소</a></li>
 					<li><a href="#">커뮤니티</a></li>
 					<li><a href="bookmark_hiking">마이페이지</a></li>
+					<li><a href="qna/qna_list">QnA</a></li>
 				</ul>
 			</div>
 			
