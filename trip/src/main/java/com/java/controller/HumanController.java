@@ -69,6 +69,7 @@ public class HumanController {
 		if(result != null) {
 			session.setAttribute("loginUser",result);
 			response.put("status", "success");
+			response.put("id", result.getHuman_id());
 		}else {
 			response.put("status", "fail"); // 이미 존재
 		}

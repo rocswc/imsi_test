@@ -232,12 +232,11 @@
 			$('#password').val('');
 			
 			if (result.status === 'success') {
-				 
-
-				    
-				 
-			
-			    location.href = "index2.jsp";
+				if(result.id === 'admin'){
+					location.href = "admin/adminDashBoard";  
+				}else{
+					location.href = "index.jsp";
+				}
 			} else {
 			    $('#login_msg').text('아이디 또는 비밀번호가 틀렸습니다.');
 			}
