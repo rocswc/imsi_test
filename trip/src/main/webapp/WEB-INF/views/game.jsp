@@ -406,7 +406,7 @@ body {
 
 		<!-- 로고 -->
 		<div class="logo">
-		<img class="logo-image" alt="로고이미지" src="">
+		<img class="logo-image" alt="로고이미지" src="/trip/resources/images/main_logo.jpg">
 			<h1><a href="index2.jsp">동틀무렵</a></h1>
 		</div>
 				

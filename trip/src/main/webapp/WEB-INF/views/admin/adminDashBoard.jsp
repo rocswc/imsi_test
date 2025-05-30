@@ -781,7 +781,7 @@ $(function() {
 			</ul>
 			<div class="auth-buttons">
 				<span class="admin-info">관리자님 환영합니다!</span>		
-				<button class="register-btn" onclick="location.href='/controller/logout'">
+				<button class="register-btn" onclick="location.href='/trip/logout'">
 					<i class="fas fa-sign-out-alt"></i>
 					로그아웃
 				</button>
