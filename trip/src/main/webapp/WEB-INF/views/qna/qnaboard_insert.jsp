@@ -375,7 +375,7 @@ body {
 			<!-- 중앙 메뉴 -->
 			<div class="nav-menu">
 				<ul>
-					<li><a href="/trip/walking">산책코스</a></li>
+					<li><a href="/trip/walking_redesign">산책코스</a></li>
 					<li><a href="/trip/running">러닝코스</a></li>
 					<li><a href="/trip/hiking">등산코스</a></li>
 					<li><a href="/trip/game">대회정보</a></li>
@@ -396,7 +396,7 @@ body {
 				<div class="board-title-container">
 					<h2 class="board-title">1:1 문의 등록</h2>
 					<div class="button-group">
-						<button type="button" class="btn btn-cancel">취소</button>
+						<button type="button" class="btn btn-cancel">취소</button>		
 						<button type="submit" class="btn btn-submit" id="submitBtn">등록</button>
 					</div>
 				</div>
@@ -412,8 +412,13 @@ body {
 		</div>
 	</div>
 
-<script>
-
-</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	$(".btn-cancel").on("click",function(){
+		location.href='qna_list';
+	});
+});
+</script> 
 </body>
 </html>

@@ -596,7 +596,7 @@ body {
 			<!-- 중앙 메뉴 -->
 			<div class="nav-menu">
 				<ul>
-					<li><a href="/trip/walking">산책코스</a></li>
+					<li><a href="/trip/walking_redesign">산책코스</a></li>
 					<li><a href="/trip/running">러닝코스</a></li>
 					<li><a href="/trip/hiking">등산코스</a></li>
 					<li><a href="/trip/game">대회정보</a></li>
@@ -688,6 +688,12 @@ body {
 <script type="text/javascript">
 $(function() {
 
+$(function() {
+	$(".btn-cancel").on("click",function(){
+		location.href='qna_list';
+	});
+});	
+	
 $(".replyModify").on("click",function(){
 	// 수정 기능 구현
 	var commentItem = $(this).closest('.comment-item');
