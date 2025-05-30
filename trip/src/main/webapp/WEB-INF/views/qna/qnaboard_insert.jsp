@@ -352,7 +352,7 @@ body {
 		<!-- 로고 -->
 		<div class="logo">
 		<img class="logo-image" alt="로고이미지" src="">
-			<h1><a href="index.jsp">동틀무렵</a></h1>
+			<h1><a href="/controller/index2.jsp">동틀무렵</a></h1>
 		</div>
 				
 		<!-- 로그인/회원가입 버튼 - 우상단 -->
@@ -360,7 +360,8 @@ body {
 			<c:choose>
 				<c:when test="${not empty sessionScope.loginUser}">
 					<p>${sessionScope.loginUser.human_id}님 환영합니다!</p>
-					<button class="login-btn" onclick="location.href='logout'">로그아웃</button>
+					<button class="login-btn" onclick="location.href='/controller/logout'">로그아웃</button>
+					<button class="login-btn2" onclick="location.href='/controller/memberUpdate'">정보수정</button>
 				</c:when>
 				<c:otherwise>
 					<button class="login-btn" onclick="location.href='getHuman'">로그인</button>
@@ -374,13 +375,14 @@ body {
 			<!-- 중앙 메뉴 -->
 			<div class="nav-menu">
 				<ul>
-					<li><a href="/controller/walking">산책코스</a></li>
-					<li><a href="/controller/running">러닝코스</a></li>
-					<li><a href="/controller/hiking">등산코스</a></li>
-					<li><a href="/controller/game">대회정보</a></li>
-					<li><a href="/controller/hotspot">주변명소</a></li>
-					<li><a href="/controller/board">커뮤니티</a></li>
-					<li><a href="/controller/bookmark_walking">마이페이지</a></li>
+					<li><a href="/trip/walking">산책코스</a></li>
+					<li><a href="/trip/running">러닝코스</a></li>
+					<li><a href="/trip/hiking">등산코스</a></li>
+					<li><a href="/trip/game">대회정보</a></li>
+					<li><a href="/trip/hotspot">주변명소</a></li>
+					<li><a href="/trip/board">커뮤니티</a></li>
+					<li><a href="qna_list">QnA</a></li>
+					<li><a href="/trip/bookmark">마이페이지</a></li>
 				</ul>
 			</div>
 		</div>
