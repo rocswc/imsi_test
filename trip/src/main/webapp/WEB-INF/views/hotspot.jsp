@@ -562,7 +562,7 @@ body {
 			<!-- 중앙 메뉴 -->
 			<div class="nav-menu">
 				<ul>
-					<li><a href="walking">산책코스</a></li>
+					<li><a href="walking_redesign">산책코스</a></li>
 					<li><a href="running">러닝코스</a></li>
 					<li><a href="hiking">등산코스</a></li>
 					<li><a href="game">대회정보</a></li>

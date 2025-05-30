@@ -103,6 +103,7 @@ public class BoardController {
 		
 		m.addAttribute("board", result);
 		
+		
 		HumanVO loginUser = (HumanVO) session.getAttribute("loginUser");
 		if( loginUser == null ) {
 			return "getHuman";

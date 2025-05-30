@@ -26,7 +26,7 @@
 }
 
 body {
-   width: 1600px;
+   width: 1920px;
    background-color: #f8f9fa;
    min-height: 100vh;
    line-height: 1.6;
@@ -51,6 +51,8 @@ body {
     top: 25px;
     display: flex;
     align-items: center;
+    width: 40px;
+    height: auto;
 }
 
 .logo {
@@ -180,7 +182,7 @@ body {
 .board-container {
     padding: 40px;
     width: 1000px;
-    margin: 60px auto;
+    margin: 70px auto;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
     background-color: #ffffff;
@@ -327,8 +329,8 @@ body {
 
 		<!-- 로고 -->
 		<div class="logo">
-		<img class="logo-image" alt="로고이미지" src="">
-			<h1><a href="index.jsp">동틀무렵</a></h1>
+		<img class="logo-image" alt="로고이미지" src="/trip/resources/images/main_logo.jpg">
+			<h1><a href="index2.jsp">동틀무렵</a></h1>
 		</div>
 				
 		<!-- 로그인/회원가입 버튼 -->
@@ -337,6 +339,7 @@ body {
 				<c:when test="${not empty sessionScope.loginUser}">
 					<p>${sessionScope.loginUser.human_id}님 환영합니다!</p>
 					<button class="login-btn" onclick="location.href='logout'">로그아웃</button>
+					<button class="login-btn" onclick="location.href='memberUpdate'">정보수정</button>
 				</c:when>
 				<c:otherwise>
 					<button class="login-btn" onclick="location.href='getHuman'">로그인</button>
@@ -350,13 +353,14 @@ body {
 			<!-- 중앙 메뉴 -->
 			<div class="nav-menu">
 				<ul>
-					<li><a href="walking">산책코스</a></li>
+					<li><a href="walking_redesign">산책코스</a></li>
 					<li><a href="running">러닝코스</a></li>
 					<li><a href="hiking">등산코스</a></li>
 					<li><a href="game">대회정보</a></li>
 					<li><a href="hotspot">주변명소</a></li>
 					<li><a href="board">커뮤니티</a></li>
-					<li><a href="bookmark_walking">마이페이지</a></li>
+					<li><a href="qna/qna_list">QnA</a></li>
+					<li><a href="bookmark">나의 북마크</a></li>
 				</ul>
 			</div>
 		</div>

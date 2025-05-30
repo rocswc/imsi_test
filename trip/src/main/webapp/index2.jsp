@@ -51,6 +51,8 @@ body {
     top: 25px;
     display: flex;
     align-items: center;
+    width: 40px;
+    height: auto;
 }
 
 .logo {
@@ -185,7 +187,6 @@ body {
    max-width: 100%;
 }
 
-/* 슬라이더 영역 */
 /* 슬라이더 영역 */
 .slider-container {
    position: relative;
@@ -610,7 +611,7 @@ body {
 
 		<!-- 로고 -->
 		<div class="logo">
-		<img class="logo-image" alt="로고이미지" src="">
+		<img class="logo-image" alt="로고이미지" src="/trip/resources/images/main_logo.jpg">
 			<h1><a href="index2.jsp">동틀무렵</a></h1>
 		</div>
 				
@@ -642,7 +643,6 @@ body {
 					<li><a href="board">커뮤니티</a></li>
 					<li><a href="qna/qna_list">QnA</a></li>
 					<li><a href="bookmark">나의 북마크</a></li>
-					
 				</ul>
 			</div>
 		</div>

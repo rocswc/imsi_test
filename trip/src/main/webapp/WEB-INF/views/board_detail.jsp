@@ -26,7 +26,7 @@
 }
 
 body {
-   width: 1600px;
+   width: 1920px;
    background-color: #f8f9fa;
    min-height: 100vh;
    line-height: 1.6;
@@ -51,6 +51,8 @@ body {
     top: 25px;
     display: flex;
     align-items: center;
+    width: 40px;
+    height: auto;
 }
 
 .logo {
@@ -176,6 +178,48 @@ body {
   width: 100%;
 }
 
+/* 중앙 메뉴 */
+.nav-menu {
+  flex: 1;
+  text-align: center;
+}
+
+.nav-menu ul {
+  display: inline-flex;
+  list-style: none;
+  gap: 40px;
+}
+
+.nav-menu ul li a {
+  text-decoration: none;
+  color: #333333;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 8px 0;
+}
+
+.nav-menu ul li a:hover {
+  color: #666666;
+}
+
+.nav-menu ul li a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  background-color: #666666;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav-menu ul li a:hover::after {
+  width: 100%;
+}
+
 /* 게시물 카드 스타일 */
 .container {
     max-width: 800px;
@@ -188,8 +232,8 @@ body {
     background-color: white;
     border: 1px solid #ddd;
     overflow: hidden;
-    margin-bottom: 30px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    margin: 70px auto;
+    padding-top: 10px;
 }
 
 .post-header {
@@ -447,7 +491,7 @@ body {
 
 		<!-- 로고 -->
 		<div class="logo">
-		<img class="logo-image" alt="로고이미지" src="">
+		<img class="logo-image" alt="로고이미지" src="/trip/resources/images/main_logo.jpg">
 			<h1><a href="index2.jsp">동틀무렵</a></h1>
 		</div>
 				
@@ -457,6 +501,7 @@ body {
 				<c:when test="${not empty sessionScope.loginUser}">
 					<p>${sessionScope.loginUser.human_id}님 환영합니다!</p>
 					<button class="login-btn" onclick="location.href='logout'">로그아웃</button>
+					<button class="login-btn" onclick="location.href='memberUpdate'">정보수정</button>
 				</c:when>
 				<c:otherwise>
 					<button class="login-btn" onclick="location.href='getHuman'">로그인</button>
@@ -470,13 +515,14 @@ body {
 			<!-- 중앙 메뉴 -->
 			<div class="nav-menu">
 				<ul>
-					<li><a href="walking">산책코스</a></li>
+					<li><a href="walking_redesign">산책코스</a></li>
 					<li><a href="running">러닝코스</a></li>
 					<li><a href="hiking">등산코스</a></li>
 					<li><a href="game">대회정보</a></li>
 					<li><a href="hotspot">주변명소</a></li>
 					<li><a href="board">커뮤니티</a></li>
-					<li><a href="bookmark_walking">마이페이지</a></li>
+					<li><a href="qna/qna_list">QnA</a></li>
+					<li><a href="bookmark">나의 북마크</a></li>
 				</ul>
 			</div>
 		</div>
@@ -505,7 +551,7 @@ body {
 				<!-- resources/images/main_image3.jpg -->
 				<div class="post-image">
 					<c:choose>
-                       <c:when test="${not empty boards.board_fname}">
+                       <c:when test="${not empty board.board_fname}">
                            <img src="${pageContext.request.contextPath}/resources/images/${board.board_realfname}_${board.board_fname}" alt="이미지" class="post-img">
                        </c:when>
                        <c:otherwise>
@@ -648,9 +694,9 @@ body {
 	// 좋아요 기능
 		
 		// 페이지 로드 시 좋아요 개수 가져오기
-		likeCount();
 		console.log($('#board_id').val());
 		
+		likeCount();
 		likeHeart();
 		
 		function likeCount(){

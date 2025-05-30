@@ -562,14 +562,14 @@ body {
 			<!-- 중앙 메뉴 -->
 			<div class="nav-menu">
 				<ul>
-					<li><a href="walking">산책코스</a></li>
+					<li><a href="walking_redesign">산책코스</a></li>
 					<li><a href="running">러닝코스</a></li>
 					<li><a href="hiking">등산코스</a></li>
 					<li><a href="game">대회정보</a></li>
 					<li><a href="hotspot">주변명소</a></li>
 					<li><a href="board">커뮤니티</a></li>
 					<li><a href="qna/qna_list">QnA</a></li>
-					<li><a href="bookmark_walking">나의 북마크</a></li>
+					<li><a href="bookmark">나의 북마크</a></li>
 				</ul>
 			</div>
 		</div>
