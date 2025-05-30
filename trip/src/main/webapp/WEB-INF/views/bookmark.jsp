@@ -381,7 +381,7 @@ body {
 				<c:when test="${not empty sessionScope.loginUser}">
 					<p>${sessionScope.loginUser.human_id}님 환영합니다!</p>
 					<button class="login-btn" onclick="location.href='logout'">로그아웃</button>
-					<button class="login-btn" onclick="location.href='logout'">정보수정</button>
+					<button class="login-btn2" onclick="location.href='memberUpdate'">정보수정</button>
 				</c:when>
 				<c:otherwise>
 					<button class="login-btn" onclick="location.href='getHuman'">로그인</button>
@@ -401,7 +401,8 @@ body {
 					<li><a href="game">대회정보</a></li>
 					<li><a href="hotspot">주변명소</a></li>
 					<li><a href="board">커뮤니티</a></li>
-					<li><a href="NewFile222">마이페이지</a></li>
+					<li><a href="qna/qna_list">QnA</a></li>
+					<li><a href="bookmark">나의 북마크</a></li>
 				</ul>
 			</div>
 		</div>
@@ -411,8 +412,8 @@ body {
 	<!-- 마이페이지 섹션 -->
 	<div class="mypage-section">
 		<div class="section-title">
-			<h2>마이페이지</h2>
-			<p>회원정보 관리 및 나만의 코스를 확인해보세요</p>
+			<h2>나의 북마크</h2>
+			<p>나만의 코스를 확인해보세요</p>
 		</div>
 		
 		<div class="tab-container">
@@ -422,18 +423,7 @@ body {
 				<button class="tab-nav-item" data-tab="bookmark-hiking">나의 등산코스</button>
 			</div>
 			
-			<div class="tab-content">
-				<!-- 회원정보변경 탭 -->
-				<div class="tab-pane" id="member-info">
-					<h3>회원정보변경</h3>
-					<p>회원정보를 수정할 수 있습니다.</p>
-				</div>
-				
-				<!-- 약관동의변경 탭 -->
-				<div class="tab-pane" id="terms-change">
-					<h3>약관동의변경</h3>
-					<p>약관 동의 내용을 변경할 수 있습니다.</p>
-				</div>
+			
 				
 				<!-- 나의 산책코스 탭 -->
 				<div class="tab-pane active" id="bookmark-walking">
@@ -457,7 +447,7 @@ body {
 				</div>
 			</div>
 		</div>
-	</div>
+	
 
 	<script>
 		// 탭 전환 기능

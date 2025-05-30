@@ -35,7 +35,7 @@ public class HumanController {
 	{
 		System.out.println("★ [Controller] 넘어온 값 확인: " + vo);
 		humanService.insertHuman(vo);
-		return "redirect:memberForm";
+		return "redirect:getHuman";
 	}
 
 

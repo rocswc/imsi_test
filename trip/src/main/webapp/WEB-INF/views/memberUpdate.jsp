@@ -314,7 +314,7 @@ body {
                 
                 <div class="btn-group">
                     <button type="submit" class="btn btn-primary">수정완료</button>
-                    <a href="index.jsp" class="btn btn-danger">돌아가기</a>
+                    <a href="index2.jsp" class="btn btn-danger">돌아가기</a>
                 </div>
             </form>
         </div>

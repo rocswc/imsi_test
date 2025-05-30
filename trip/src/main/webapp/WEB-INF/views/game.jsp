@@ -364,7 +364,7 @@ body {
 		<!-- 로고 -->
 		<div class="logo">
 		<img class="logo-image" alt="로고이미지" src="">
-			<h1><a href="index.jsp">동틀무렵</a></h1>
+			<h1><a href="index2.jsp">동틀무렵</a></h1>
 		</div>
 				
 		<!-- 로그인/회원가입 버튼 -->
@@ -373,6 +373,7 @@ body {
 				<c:when test="${not empty sessionScope.loginUser}">
 					<p>${sessionScope.loginUser.human_id}님 환영합니다!</p>
 					<button class="login-btn" onclick="location.href='logout'">로그아웃</button>
+					<button class="login-btn" onclick="location.href='memberUpdate'">정보수정</button>
 				</c:when>
 				<c:otherwise>
 					<button class="login-btn" onclick="location.href='getHuman'">로그인</button>
@@ -392,7 +393,8 @@ body {
 					<li><a href="game">대회정보</a></li>
 					<li><a href="hotspot">주변명소</a></li>
 					<li><a href="#">커뮤니티</a></li>
-					<li><a href="bookmark_walking">마이페이지</a></li>
+					<li><a href="qna/qna_list">QnA</a></li>
+					<li><a href="bookmark_walking">나의 북마크</a></li>
 				</ul>
 			</div>
 			

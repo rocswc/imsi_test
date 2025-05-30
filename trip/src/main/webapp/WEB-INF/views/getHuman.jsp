@@ -235,7 +235,7 @@
 				if(result.id === 'admin'){
 					location.href = "admin/adminDashBoard";  
 				}else{
-					location.href = "index.jsp";
+					location.href = "index2.jsp";
 				}
 			} else {
 			    $('#login_msg').text('아이디 또는 비밀번호가 틀렸습니다.');

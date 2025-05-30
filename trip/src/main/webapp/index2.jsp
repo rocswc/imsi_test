@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<title>동틀무렵 - 메인페이지</title>
+<title>동틀무렴 - 메인페이지</title>
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 	rel="stylesheet">
@@ -247,8 +247,49 @@ body {
    line-height: 1.8;
    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
    font-weight: 400;
+   margin-bottom: 30px;
 }
 
+/* 검색창 스타일 */
+.search-container {
+   position: relative;
+   max-width: 500px;
+   margin: 0 auto;
+}
+
+.search-box {
+   width: 100%;
+   padding: 15px 50px 15px 20px;
+   border: none;
+   border-radius: 50px;
+   background: rgba(255, 255, 255, 0.95);
+   font-size: 16px;
+   outline: none;
+   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+   transition: all 0.3s ease;
+   cursor: pointer;
+}
+
+.search-box:focus {
+   background: rgba(255, 255, 255, 1);
+   box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
+   transform: translateY(-2px);
+}
+
+.search-box::placeholder {
+   color: #666;
+   font-weight: 500;
+}
+
+.search-icon {
+   position: absolute;
+   right: 20px;
+   top: 50%;
+   transform: translateY(-50%);
+   color: #666;
+   font-size: 18px;
+   pointer-events: none;
+}
 
 .slider-arrows {
    position: absolute;
@@ -579,6 +620,7 @@ body {
 				<c:when test="${not empty sessionScope.loginUser}">
 					<p>${sessionScope.loginUser.human_id}님 환영합니다!</p>
 					<button class="login-btn" onclick="location.href='logout'">로그아웃</button>
+					<button class="login-btn" onclick="location.href='memberUpdate'">정보수정</button>
 				</c:when>
 				<c:otherwise>
 					<button class="login-btn" onclick="location.href='getHuman'">로그인</button>
@@ -598,7 +640,9 @@ body {
 					<li><a href="game">대회정보</a></li>
 					<li><a href="hotspot">주변명소</a></li>
 					<li><a href="board">커뮤니티</a></li>
-					<li><a href="bookmark">마이페이지</a></li>
+					<li><a href="qna/qna_list">QnA</a></li>
+					<li><a href="bookmark">나의 북마크</a></li>
+					
 				</ul>
 			</div>
 		</div>
@@ -615,7 +659,10 @@ body {
 					<div class="slide-content">
 						<h2>서울 숲 힐링 산책로</h2>
 						<p>도심 속 자연을 느낄 수 있는 서울 숲의 아름다운 산책로를 만나보세요.</p>
-						 <a href="chatbot" class="btn-link">무엇이든 물어보살</a>
+						<div class="search-container">
+							<input type="text" class="search-box" placeholder="무엇이든 물어보세요!" onclick="location.href='chatbot'">
+							<i class="fas fa-search search-icon"></i>
+						</div>
 					</div>
 				</div>
 				<div class="slide"
