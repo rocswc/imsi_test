@@ -1,5 +1,6 @@
 package com.java.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.java.vo.BoardVO;
@@ -16,9 +17,10 @@ public interface BoardService {
 	public int countLike(Integer board_id);
 	
 	public void addLike(Integer board_id, HumanVO human_id);
+	
 	public boolean isLikedByUser(Integer board_id, HumanVO human_id);
 	
-	public void unLike(Integer board_id);
+	public void unLike(Integer board_id, HumanVO human_id);
 	
 	public void modifyBoard(BoardVO vo);
 	

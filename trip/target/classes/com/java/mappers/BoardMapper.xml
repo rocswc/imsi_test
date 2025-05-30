@@ -58,11 +58,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE	board_id = #{board_id} 
 	</select>
 	
+	
 	<!-- 좋아요 개수 -->
 	<select id="countLike" parameterType="int" resultType="int">
-		SELECT like_count FROM board_like
+		SELECT COUNT(*) FROM board_like
 		WHERE board_id = #{board_id}
 	</select>
+	
+	
 	
 	<!-- board 테이블 좋아요 수 -->
 	<update id="updateBoardLikeCount" parameterType="map">
@@ -75,22 +78,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 좋아요 수 증가 -->
 	<insert id="addLike" parameterType="map">
 	    INSERT INTO board_like (like_id, board_id, like_count, liker_id)
-	    VALUES (board_like_seq.NEXTVAL, #{board_id}, 100, #{liker_id})
+	    VALUES (board_like_seq.NEXTVAL, #{board_id}, 0, #{liker_id})
 	</insert>
 	
-	<!-- 좋아요 유저 확인 -->
+	<!-- 좋아요 유저 여부확인 -->
 	<select id="isLikedByUser" parameterType="map" resultType="int">
    		SELECT	COUNT(*) FROM board_like
     	WHERE	board_id = #{board_id}
       	AND		liker_id = #{liker_id}
 	</select>
 	
+	
 	<!-- 좋아요 수 감소 -->
-	<update id="unLike" parameterType="int">
-		UPDATE	board_like
-		SET		like_count = like_count - 1
-		WHERE	board_id = #{board_id}
-	</update>
+	<delete id="unLike" parameterType="map">
+		DELETE FROM	board_like
+		WHERE		board_id = #{board_id} AND liker_id = #{liker_id}
+	</delete>
+	
 	
 	<!-- 게시글 수정 -->
 	<update id="modifyBoard" parameterType="com.java.vo.BoardVO">

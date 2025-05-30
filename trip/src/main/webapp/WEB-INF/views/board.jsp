@@ -227,7 +227,7 @@ body {
     cursor: pointer;
     font-size: 14px;
     font-weight: 500;
-    transition: all 0.3s ease;
+    transition: all 0.1s ease;
 }
 
 .section-header button:hover {
@@ -403,9 +403,14 @@ body {
                   		<c:forEach var="boards" items="${boardList}">
                             <div class="card" onclick="location.href='getBoard?board_id=${boards.board_id}'">
                                 <div class="card-img-container">
-                                <c:if test="${not empty boards.board_fname}">
-					                <img src="${pageContext.request.contextPath}/resources/images/${boards.board_realfname}_${boards.board_fname}" alt="이미지" class="card-img">
-					            </c:if>
+                                <c:choose>
+                                    <c:when test="${not empty boards.board_fname}">
+                                        <img src="${pageContext.request.contextPath}/resources/images/${boards.board_realfname}_${boards.board_fname}" alt="이미지" class="card-img">
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img src="${pageContext.request.contextPath}/resources/images/No_image.jpg" alt="이미지" class="card-img">
+                                    </c:otherwise>
+                                </c:choose>
                                 </div>
                                 <div class="card-content">
                                     <div class="card-header">
@@ -428,7 +433,7 @@ body {
                                             </div>
                                             <div class="stat">
                                                 <span class="stat-icon">❤</span>
-                                                <span>${boards.like_count !=null? boards.like_count : 3}</span>
+                                                <span>${boards.like_count !=null? boards.like_count : 0}</span>
                                             </div>
                                         </div>
                                     </div>

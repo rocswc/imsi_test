@@ -1,12 +1,14 @@
 package com.java.controller;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,13 +35,13 @@ public class BoardController {
 		m.addAttribute("boardList", boardList);
 		
 	    // 파일명, 리얼파일명 콘솔 출력
-	    for (BoardVO board : boardList) {
-	        System.out.println("게시글 ID: " + board.getBoard_id());
-	        System.out.println("파일명: " + board.getBoard_fname());
-	        System.out.println("리얼파일명: " + board.getBoard_realfname());
-	        System.out.println("댓글수:" + board.getReply_count());
-	        System.out.println("좋아요수:" + board.getLike_count());
-	    }
+//	    for (BoardVO board : boardList) {
+//	        System.out.println("게시글 ID: " + board.getBoard_id());
+//	        System.out.println("파일명: " + board.getBoard_fname());
+//	        System.out.println("리얼파일명: " + board.getBoard_realfname());
+//	        System.out.println("댓글수:" + board.getReply_count());
+//	        System.out.println("좋아요수:" + board.getLike_count());
+//	    }
 	    
 		return "board";
 	}
@@ -63,7 +65,7 @@ public class BoardController {
 		System.out.println(vo.toString());
 		
 		// 경로 가져오기
-		String uploadPath = request.getSession().getServletContext().getRealPath("/resources/upload/");
+		String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/");
 		
 		if (!file.isEmpty()) {
 			String getOriginalFilename = file.getOriginalFilename();
@@ -75,8 +77,8 @@ public class BoardController {
 			vo.setBoard_fsize(getSize);
 			vo.setBoard_realfname(realfname.toString());
 		
-			File f = new File("D:\\trip\\trip\\src\\main\\webapp\\resources\\images\\"+realfname + "_" + getOriginalFilename);
-			//File f = new File(uploadPath + realfname + "_" + getOriginalFilename);
+			//File f = new File("D:\\trip4\\trip\\src\\main\\webapp\\resources\\images\\"+realfname + "_" + getOriginalFilename);
+			File f = new File(uploadPath + realfname + "_" + getOriginalFilename);
 			
 			try {
 				file.transferTo(f);
@@ -96,8 +98,8 @@ public class BoardController {
 	public String getBoard(@RequestParam Integer board_id, Model m, HttpSession session) {
 		BoardVO result = boardservice.getBoard(board_id);
 		
-		System.out.println("파일명: " + result.getBoard_fname());
-	    System.out.println("리얼파일명: " + result.getBoard_realfname());
+		//System.out.println("파일명: " + result.getBoard_fname());
+	    //System.out.println("리얼파일명: " + result.getBoard_realfname());
 		
 		m.addAttribute("board", result);
 		
@@ -109,26 +111,51 @@ public class BoardController {
 		return "board_detail";
 	}
 		
-	//좋아요 수
+	//게시글(board_detail) 좋아요 수
 	@GetMapping("likeCount")
 	@ResponseBody
-	public int countLike(Integer board_id) {
+	public int countLike(@RequestParam Integer board_id) {
+		
+		//System.out.println("cotroller 게시글번호: " + board_id);
+		//System.out.println(boardservice.countLike(board_id));
 		return boardservice.countLike(board_id);
 	}
+	
+	//게시글(board_detail)페이지 로드시 ♡유지
+	@GetMapping("likeHeart")
+	@ResponseBody
+	public boolean isLikedByUser(@RequestParam Integer board_id, HttpSession session) {
+		HumanVO human_id = (HumanVO) session.getAttribute("loginUser");
+		
+		//System.out.println(board_id);
+		
+		boolean isLiked = false;
+		
+		if (human_id != null) {
+		    isLiked = boardservice.isLikedByUser(board_id, human_id);
+		}
+		
+		//System.out.println("boolean:" + isLiked);
+		
+		return isLiked;
+	}
+	
+	
 	
 	// 좋아요 추가
 	@GetMapping("addLike")
 	@ResponseBody
-	public String addLike(@RequestParam Integer board_id, HttpSession session) {
+	public String addLike(@RequestParam Integer board_id, HttpSession session, Model m) {
 		HumanVO human_id = (HumanVO) session.getAttribute("loginUser");
-	    
+		
+		
 	    if (human_id == null) {
 	        return "not_logged_in";
 	    }
 	    
 	    // 이미 좋아요 눌렀는지 확인
 	    if (boardservice.isLikedByUser(board_id, human_id)) {
-	        return "already_liked";
+	    	return "already_liked";
 	    }
 	    
 	    // 좋아요 추가
@@ -140,8 +167,10 @@ public class BoardController {
 	// 좋아요 감소
 	@GetMapping("unLike")
 	@ResponseBody
-	public void unLike(Integer board_id) {
-		boardservice.unLike(board_id);
+	public void unLike(@RequestParam Integer board_id, HttpSession session) {
+		HumanVO human_id = (HumanVO) session.getAttribute("loginUser");
+		
+		boardservice.unLike(board_id, human_id);
 	}
 	
 	

@@ -219,7 +219,6 @@ body {
   font-size: 24px;
   font-weight: 700;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(21, 98, 6, 0.2);
 }
 
 .info-form {

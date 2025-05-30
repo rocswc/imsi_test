@@ -1,5 +1,6 @@
 package com.java.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +27,7 @@ public interface BoardDAO {
 	public void addLike(Map<String, Object> param);
 	public int isLikedByUser(Map<String, Object> param);
 	
-	public void unLike(Integer board_id);
+	public void unLike(Map<String, Object> param);
 	
 	public void modifyBoard(BoardVO vo);
 	

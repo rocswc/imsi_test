@@ -53,7 +53,7 @@ public class BoardServiceImpl implements BoardService{
 		param.put("board_id", board_id);
 		param.put("liker_id", human_id.getHuman_id());
 		
-		System.out.println("liker_id : " + human_id.getHuman_id());
+		//System.out.println("liker_id : " + human_id.getHuman_id());
 		
 		boarddao.addLike(param);
 	}
@@ -67,8 +67,12 @@ public class BoardServiceImpl implements BoardService{
 	    return boarddao.isLikedByUser(param) > 0;
 	}
 	
-	public void unLike(Integer board_id) {
-		boarddao.unLike(board_id);
+	public void unLike(Integer board_id, HumanVO human_id) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("board_id", board_id);
+	    param.put("liker_id", human_id.getHuman_id());
+	    
+		boarddao.unLike(param);
 	}
 	
 	public void modifyBoard(BoardVO vo) {

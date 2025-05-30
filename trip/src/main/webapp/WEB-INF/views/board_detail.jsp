@@ -377,6 +377,7 @@ body {
 	cursor: pointer;
 }
 
+
 /* 댓글 수정 폼 */
 .reply-content-edit {
 	width: 100%;
@@ -392,6 +393,7 @@ body {
 .reply-form {
     border-top: 1px solid #eee;
     padding-top: 20px;
+    position: relative;
 }
 
 .reply-input {
@@ -405,11 +407,17 @@ body {
     font-size: 14px;
 }
 
+.bottom-buttons {
+    display: flex;
+    justify-content: flex-end; /* 오른쪽 정렬 */
+    gap: 10px; /* 버튼 사이 간격 */
+}
+
 .reply-submit {
-    background-color: #156206;
+    background-color: #191919;
     color: white;
     border: none;
-    padding: 8px 16px;
+    padding: 5px 15px;
     border-radius: 4px;
     cursor: pointer;
     font-weight: 500;
@@ -417,8 +425,18 @@ body {
     margin-bottom: 15px;
 }
 
-.reply-submit:hover {
-    background-color: #0d4e03;
+.return-btn {
+	text-decoration: none;
+	background-color: white;
+    color: #333333;
+    border: 1px solid #333333;
+    padding: 5px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    float: right;
+    margin-bottom: 15px;
+	font-size: 13px;
 }
 
 </style>
@@ -470,7 +488,7 @@ body {
 			<div class="post-card">
 				<div class="post-header">
 					<h1 class="post-title">${board.board_title}</h1>
-					<input type="" name="board_id" id="board_id" value="${board.board_id}">
+					<input type="hidden" name="board_id" id="board_id" value="${board.board_id}">
 					
 					<span class="post-button">
 						<c:if test="${board.human_id == sessionScope.loginUser.human_id}">
@@ -486,7 +504,14 @@ body {
 				</div>
 				<!-- resources/images/main_image3.jpg -->
 				<div class="post-image">
-					<img src="/trip/resources/images/${board.board_realfname}_${board.board_fname}" alt="러닝이미지" class="post-img">
+					<c:choose>
+                       <c:when test="${not empty boards.board_fname}">
+                           <img src="${pageContext.request.contextPath}/resources/images/${board.board_realfname}_${board.board_fname}" alt="이미지" class="post-img">
+                       </c:when>
+                       <c:otherwise>
+                           
+                       </c:otherwise>
+                	</c:choose>
 				</div>
 				
 				<!-- <div class="post-tags">
@@ -541,7 +566,10 @@ body {
 							<textarea class="reply-input" name="reply_content" placeholder="댓글을 입력해주세요..."></textarea>
 							<input type="hidden" name="reply_writer" value="${sessionScope.loginUser.human_id}">
 							<input type="hidden" name="board_id" id="board_id" value="${board.board_id}">
-							<button type="button" class="reply-submit" id="replyConfirm">등록</button>
+							<div class="bottom-buttons">
+						      <a href="board" class="return-btn">목록</a>
+						      <button type="button" class="reply-submit" id="replyConfirm">등록</button>
+						    </div>
 						</div>
 					</form>
 					
@@ -618,11 +646,12 @@ body {
 	
 	
 	// 좋아요 기능
-	$(function(){
 		
 		// 페이지 로드 시 좋아요 개수 가져오기
 		likeCount();
-		//console.log($('#board_id').val());
+		console.log($('#board_id').val());
+		
+		likeHeart();
 		
 		function likeCount(){
 			
@@ -638,6 +667,31 @@ body {
 				}
 			});
 		}
+		
+		// 게시글페이지 로드 시 ♥유지
+		function likeHeart(){
+			console.log("🔥 likeHeart() 호출됨");
+			$.ajax({
+				url: "likeHeart"
+				,type: "get"
+				,data: {board_id : $('#board_id').val()}
+				,success: function(result){
+					console.log(result);
+					if (result === true) {
+				        $('.like-button i').addClass('active');
+				    } else {
+				        $('.like-button i').removeClass('active');
+				    }
+				}
+				,error: function(err){
+					alert('likeHeart실패');
+					console.log(err);
+				}
+			});
+		}
+		
+		
+		
 		
 		// 좋아요 버튼 이벤트
 		$('.liked').click(function(){
@@ -683,10 +737,8 @@ body {
 			   });
 		    }
 		});
-	});
 	
 	//	댓글 기능
-	$(function(){
 		
 		// 1. 페이지 로딩 시 댓글 목록 출력
 		listReply();
@@ -851,7 +903,6 @@ body {
 				}
 			});
 		}
-	});
 	
 	</script>
     
