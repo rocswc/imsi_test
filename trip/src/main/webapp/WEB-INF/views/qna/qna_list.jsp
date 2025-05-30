@@ -346,7 +346,7 @@ body {
 					<li><a href="/trip/hotspot">주변명소</a></li>
 					<li><a href="/trip/board">커뮤니티</a></li>
 					<li><a href="qna_list">QnA</a></li>
-					<li><a href="/trip/bookmark">마이페이지</a></li>
+					<li><a href="/trip/bookmark">나의 북마크</a></li>
 				</ul>
 			</div>
 		</div>
