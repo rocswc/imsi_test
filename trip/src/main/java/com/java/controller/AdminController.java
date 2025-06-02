@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.java.service.AdminService;
 import com.java.vo.ActivitySummaryVO;
 import com.java.vo.AdminDashBoardVO;
+import com.java.vo.BoardVO;
 import com.java.vo.HikingLevelChartVO;
 import com.java.vo.HumanVO;
 import com.java.vo.MemberChartVO;
@@ -23,11 +24,13 @@ public class AdminController {
 		AdminDashBoardVO getAdminDashBoard = adminService.getAdminDashBoard();
 		ActivitySummaryVO getActivitySummary = adminService.getActivitySummary();
 		List<MemberChartVO> getMemberChartList = adminService.getMemberChartList();
+		List<BoardVO> getBoardLikeList = adminService.getBoardLikeList();
 		List<HikingLevelChartVO> getHikingLevelChartList = adminService.getHikingLevelChartList();
 		
 		m.addAttribute("adminDashBoard", getAdminDashBoard);
 		m.addAttribute("getActivitySummary", getActivitySummary);
 		m.addAttribute("memberChartList", getMemberChartList);
+		m.addAttribute("getBoardLikeList", getBoardLikeList);	
 		m.addAttribute("getHikingLevelChartList", getHikingLevelChartList);	
 	}
 

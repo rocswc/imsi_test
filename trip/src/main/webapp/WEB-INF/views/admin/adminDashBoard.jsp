@@ -575,22 +575,15 @@ $(function() {
         });
         
         // 게시글 좋아요 순위 차트 데이터 (예시 데이터 - 실제로는 컨트롤러에서 전달받아야 함)
-        // ${topLikedPosts}와 같은 형태로 데이터를 받아와야 합니다
         var postTitles = [];
         var likeCounts = [];
 
         // 컨트롤러에서 전달받은 데이터 사용 (예시)
-        <c:forEach items="${topLikedPosts}" var="post" varStatus="status">
-            postTitles.push("게시글 ${status.count}");
-            likeCounts.push(${post.like_count});  
+        <c:forEach items="${getBoardLikeList}" var="item">
+            postTitles.push("${item.board_title}");
+            likeCounts.push(${item.like_count});  
         </c:forEach>
-
-        // 임시 데이터 (실제 구현시 삭제,실제로 가져올 내용은 DB의 글제목과 좋아요 수)
-        if(postTitles.length === 0) {
-            postTitles = ['인기글1', '인기글2', '인기글3', '인기글4', '인기글5', '인기글6', '인기글7', '인기글8', '인기글9', '인기글10'];
-            likeCounts = [150, 135, 120, 98, 87, 76, 65, 54, 43, 32];
-        }
-
+		
         // 게시글 좋아요 순위 차트
         const ctx3 = document.getElementById('topLikedPostsChart').getContext('2d');
         const topLikedPostsChart = new Chart(ctx3, {

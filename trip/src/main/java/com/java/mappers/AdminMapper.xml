@@ -40,6 +40,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  END
 	</select>
 	 
+	<select id='getBoardLikeList' resultType='com.java.vo.BoardVO'>
+		SELECT BOARD_TITLE, LIKE_COUNT
+		FROM (
+		    SELECT BOARD_TITLE, LIKE_COUNT
+		    FROM BOARD
+		    ORDER BY LIKE_COUNT DESC
+		) 
+		<![CDATA[WHERE ROWNUM <= 10]]>		
+	</select>
+	 
 	<select id='getMemberChartList' resultType='com.java.vo.MemberChartVO'>
 		SELECT TO_CHAR(TO_DATE(human_join, 'YYYY-MM-DD'), 'YYYY-MM') AS join_mouth, COUNT(*) AS join_count
 		FROM HUMAN

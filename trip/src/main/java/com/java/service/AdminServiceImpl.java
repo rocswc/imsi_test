@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.java.dao.AdminDAO;
 import com.java.vo.ActivitySummaryVO;
 import com.java.vo.AdminDashBoardVO;
+import com.java.vo.BoardVO;
 import com.java.vo.HikingLevelChartVO;
 import com.java.vo.HumanVO;
 import com.java.vo.MemberChartVO;
@@ -28,6 +29,11 @@ public class AdminServiceImpl implements AdminService {
 	
 	public List<MemberChartVO> getMemberChartList() {
 		List<MemberChartVO> result = adminDAO.getMemberChartList();
+		return result;
+	}; 
+	
+	public List<BoardVO> getBoardLikeList() {
+		List<BoardVO> result = adminDAO.getBoardLikeList();
 		return result;
 	}; 
 	

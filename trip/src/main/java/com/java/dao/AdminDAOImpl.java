@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.java.vo.ActivitySummaryVO;
 import com.java.vo.AdminDashBoardVO;
+import com.java.vo.BoardVO;
 import com.java.vo.HikingLevelChartVO;
 import com.java.vo.HumanVO;
 import com.java.vo.MemberChartVO;
@@ -31,6 +32,11 @@ public class AdminDAOImpl implements AdminDAO {
 	public List<MemberChartVO> getMemberChartList(){
 		System.out.println("===> Mybatis getMemberChartList() 호출");
 		return sqlsession.selectList("AdminMapper.getMemberChartList");
+	}
+	
+	public List<BoardVO> getBoardLikeList(){
+		System.out.println("===> Mybatis getBoardLikeList() 호출");
+		return sqlsession.selectList("AdminMapper.getBoardLikeList");
 	}
 	
 	public List<HikingLevelChartVO> getHikingLevelChartList(){
