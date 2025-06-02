@@ -37,4 +37,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		DELETE FROM QNA_BOARD_REPLY WHERE reply_id=#{reply_id}
 	</delete>
 
+    <update id="qnaUpdateReply" parameterType="com.java.vo.QnABoardReplyVO">
+		UPDATE QNA_BOARD_REPLY
+		SET reply_content=#{reply_content}
+		WHERE reply_id=#{reply_id}
+	</update>
+
 </mapper>

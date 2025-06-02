@@ -70,4 +70,12 @@ public class QnAController {
 		return "삭제성공?";
 	}
 	
+	@RequestMapping("qna/qnaUpdateReply") //문의글 삭제
+	@ResponseBody
+	public String qnaUpdateReply(QnABoardReplyVO vo) {	
+		Integer result = qnAService.qnaUpdateReply(vo);
+		System.out.println(vo.toString());
+		return "갱신성공?";
+	}
+	
 }

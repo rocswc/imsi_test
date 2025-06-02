@@ -31,5 +31,9 @@ public class QnAServiceImpl implements QnAService {
 	public Integer qnaDeleteReply(QnABoardReplyVO vo){
 		return qnADAO.qnaDeleteReply(vo);
 	}
-
+	
+	public Integer qnaUpdateReply(QnABoardReplyVO vo){
+		return qnADAO.qnaUpdateReply(vo);
+	}
+	
 }

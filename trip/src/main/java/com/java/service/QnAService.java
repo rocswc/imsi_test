@@ -9,4 +9,5 @@ public interface QnAService {
 	List<QnABoardReplyVO> getQnAReplyList(QnABoardVO vo);
 	void qnaBoardReplyRegister(QnABoardReplyVO vo);
 	Integer qnaDeleteReply(QnABoardReplyVO vo);
+	Integer qnaUpdateReply(QnABoardReplyVO vo);
 }

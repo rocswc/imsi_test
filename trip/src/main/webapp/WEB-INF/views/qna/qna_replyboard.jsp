@@ -51,8 +51,6 @@ body {
     top: 25px;
     display: flex;
     align-items: center;
-    width: 40px;
-    height: auto;
 }
 
 .logo {
@@ -359,6 +357,12 @@ body {
     transform: translateY(-2px);
 }
 
+.comment-item.edit-mode {
+    background: white;
+    border-color: #666666;
+    box-shadow: 0 0 0 3px rgba(102, 102, 102, 0.1);
+}
+
 .comment-header {
     display: flex;
     justify-content: space-between;
@@ -447,6 +451,67 @@ body {
     color: #666666;
     line-height: 1.6;
     font-size: 15px;
+}
+
+/* 수정 모드 스타일 */
+.edit-textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 15px;
+    border: 2px solid #666666;
+    border-radius: 10px;
+    background: white;
+    font-size: 15px;
+    line-height: 1.6;
+    resize: vertical;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #333;
+}
+
+.edit-textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(102, 102, 102, 0.2);
+}
+
+.edit-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.btn-save {
+    background: #28a745;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-save:hover {
+    background: #218838;
+    transform: translateY(-1px);
+}
+
+.btn-cancel-edit {
+    background: #dc3545;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-cancel-edit:hover {
+    background: #c82333;
+    transform: translateY(-1px);
 }
 
 /* 댓글 작성 폼 */
@@ -574,8 +639,8 @@ body {
 	<header class="header">
 		<!-- 로고 -->
 		<div class="logo">
-		<img class="logo-image" alt="로고이미지" src="/trip/resources/images/main_logo.jpg">
-			<h1><a href="/trip/index2.jsp">동틀무렵</a></h1>
+		<img class="logo-image" alt="로고이미지" src="">
+			<h1><a href="index.jsp">동틀무렵</a></h1>
 		</div>
 				
 		<!-- 로그인/회원가입 버튼 - 우상단 -->
@@ -583,8 +648,7 @@ body {
 			<c:choose>
 				<c:when test="${not empty sessionScope.loginUser}">
 					<p>${sessionScope.loginUser.human_id}님 환영합니다!</p>
-					<button class="login-btn" onclick="location.href='/trip/logout'">로그아웃</button>
-					<button class="login-btn2" onclick="location.href='/trip/memberUpdate'">정보수정</button>
+					<button class="login-btn" onclick="location.href='logout'">로그아웃</button>
 				</c:when>
 				<c:otherwise>
 					<button class="login-btn" onclick="location.href='getHuman'">로그인</button>
@@ -598,14 +662,13 @@ body {
 			<!-- 중앙 메뉴 -->
 			<div class="nav-menu">
 				<ul>
-					<li><a href="/trip/walking_redesign">산책코스</a></li>
-					<li><a href="/trip/running">러닝코스</a></li>
-					<li><a href="/trip/hiking">등산코스</a></li>
-					<li><a href="/trip/game">대회정보</a></li>
-					<li><a href="/trip/hotspot">주변명소</a></li>
-					<li><a href="/trip/board">커뮤니티</a></li>
-					<li><a href="qna_list">QnA</a></li>
-					<li><a href="/trip/bookmark">나의 북마크</a></li>
+					<li><a href="walking">산책코스</a></li>
+					<li><a href="running">러닝코스</a></li>
+					<li><a href="hiking">등산코스</a></li>
+					<li><a href="game">대회정보</a></li>
+					<li><a href="hotspot">주변명소</a></li>
+					<li><a href="board">커뮤니티</a></li>
+					<li><a href="bookmark_walking">마이페이지</a></li>
 				</ul>
 			</div>
 		</div>
@@ -640,7 +703,7 @@ body {
 				
 				<div class="comment-list">
 					<c:forEach var="item" items="${getQnAReplyList}">
-						<div class="comment-item">
+						<div class="comment-item" data-reply-id="${item.reply_id}">
 							<div class="comment-header">
 								<div class="comment-author">
 									<div class="author-avatar">
@@ -666,7 +729,7 @@ body {
 									<input type="hidden" class="reply_id" value="${item.reply_id}">
 								</div>
 							</div>
-							<div class="comment-content">${item.reply_content}</div>
+							<div class="comment-content" data-original-content="${item.reply_content}">${item.reply_content}</div>
 						</div>
 					</c:forEach>
 				</div>
@@ -690,74 +753,169 @@ body {
 <script type="text/javascript">
 $(function() {
 
-$(function() {
-	$(".btn-cancel").on("click",function(){
-		location.href='qna_list';
-	});
-});	
-	
-$(".replyModify").on("click",function(){
-	// 수정 기능 구현
-	var commentItem = $(this).closest('.comment-item');
-	var currentContent = commentItem.find('.comment-content').text();
-	var replyId = $(this).siblings('.reply_id').val();
-	
-	// 임시로 알림창 표시
-	var newContent = prompt("수정할 내용을 입력하세요:", currentContent);
-	if(newContent && newContent !== currentContent) {
-		// AJAX로 수정 요청
-		$.ajax({
-			type: 'post',
-			url: 'qnaUpdateReply',
-			data: {
-				reply_id: replyId,
-				reply_content: newContent
-			},
-			success: function(result) {
-				alert("수정이 완료되었습니다.");
-				location.reload();
-			},
-			error: function(err) {
-				alert("수정에 실패했습니다.");
-				console.log(err);
-			}
-		});
-	}
+// 수정 모드로 전환하는 함수
+function enterEditMode(commentItem) {
+    var contentDiv = commentItem.find('.comment-content');
+    var originalContent = contentDiv.data('original-content');
+    var replyId = commentItem.find('.reply_id').val();
+    
+    // 수정 모드 스타일 적용
+    commentItem.addClass('edit-mode');
+    
+    // 기존 내용을 textarea로 교체
+    var editHtml = `
+        <div class="edit-content">
+            <textarea class="edit-textarea">${originalContent}</textarea>
+            <div class="edit-buttons">
+                <button class="btn-save">
+                    <i class="fas fa-check"></i> 저장
+                </button>
+                <button class="btn-cancel-edit">
+                    <i class="fas fa-times"></i> 취소
+                </button>
+            </div>
+        </div>
+    `;
+    
+    contentDiv.html(editHtml);
+    commentItem.find('.comment-actions').hide(); // 수정/삭제 버튼 숨기기
+    
+    // textarea에 포커스
+    commentItem.find('.edit-textarea').focus();
+}
+
+// 수정 모드에서 나가는 함수
+function exitEditMode(commentItem) {
+    var contentDiv = commentItem.find('.comment-content');
+    var originalContent = contentDiv.data('original-content');
+    
+    // 원래 모드로 복원
+    commentItem.removeClass('edit-mode');
+    contentDiv.html(originalContent);
+    commentItem.find('.comment-actions').show(); // 수정/삭제 버튼 다시 보이기
+}
+
+// 수정 버튼 클릭 이벤트
+$(".replyModify").on("click", function() {
+    var commentItem = $(this).closest('.comment-item');
+    
+    // 다른 수정 모드들 종료
+    $('.comment-item.edit-mode').each(function() {
+        exitEditMode($(this));
+    });
+    
+    // 현재 항목을 수정 모드로 전환
+    enterEditMode(commentItem);
 });
 
+// 저장 버튼 클릭 이벤트 (동적으로 생성되는 요소이므로 이벤트 위임 사용)
+$(document).on('click', '.btn-save', function() {
+    var commentItem = $(this).closest('.comment-item');
+    var newContent = commentItem.find('.edit-textarea').val().trim();
+    var replyId = commentItem.find('.reply_id').val(); // reply_id를 comment-item에서 찾기
+    var originalContent = commentItem.find('.comment-content').data('original-content');
+    
+    if (!newContent) {
+        alert("내용을 입력해주세요.");
+        return;
+    }
+    
+    if (newContent === originalContent) {
+        // 내용이 변경되지 않았으면 수정 모드만 종료
+        exitEditMode(commentItem);
+        return;
+    }
+    
+    // 저장 버튼 비활성화 및 로딩 표시
+    $(this).prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> 저장 중...');
+    
+    // AJAX로 수정 요청
+    $.ajax({
+        type: 'post',
+        url: 'qnaUpdateReply',
+        data: {
+            reply_id: replyId,
+            reply_content: newContent
+        },
+        success: function(result) {
+            // 성공 시 내용 업데이트
+            var contentDiv = commentItem.find('.comment-content');
+            contentDiv.data('original-content', newContent);
+            contentDiv.html(newContent);
+            
+            // 수정 모드 종료
+            commentItem.removeClass('edit-mode');
+            commentItem.find('.comment-actions').show();
+            
+            // 성공 메시지
+            alert("수정이 완료되었습니다.");
+        },
+        error: function(err) {
+            alert("수정에 실패했습니다.");
+            console.log(err);
+            
+            // 저장 버튼 복원
+            $('.btn-save').prop('disabled', false).html('<i class="fas fa-check"></i> 저장');
+        }
+    });
+});
+
+// 취소 버튼 클릭 이벤트 (동적으로 생성되는 요소이므로 이벤트 위임 사용)
+$(document).on('click', '.btn-cancel-edit', function() {
+    var commentItem = $(this).closest('.comment-item');
+    exitEditMode(commentItem);
+});
+
+// ESC 키로 수정 모드 취소
+$(document).on('keydown', '.edit-textarea', function(e) {
+    if (e.keyCode === 27) { // ESC key
+        var commentItem = $(this).closest('.comment-item');
+        exitEditMode(commentItem);
+    }
+});
+
+// Ctrl+Enter로 저장
+$(document).on('keydown', '.edit-textarea', function(e) {
+    if (e.ctrlKey && e.keyCode === 13) { // Ctrl + Enter
+        var commentItem = $(this).closest('.comment-item');
+        commentItem.find('.btn-save').click();
+    }
+});
+
+// 삭제 버튼 클릭 이벤트
 $(".replyDelete").on("click", function(){
-	if(!confirm("정말로 삭제하시겠습니까?")) {
-		return;
-	}
-	
-	var commentItem = $(this).closest('.comment-item');
-	var replyId = $(this).siblings('.reply_id').val();
-	
-	$.ajax({
-		type: 'post',
-		url: 'qnadeleteReply',
-		data: {reply_id: replyId},
-		success: function(result) {
-			// 부드러운 삭제 애니메이션
-			commentItem.fadeOut(500, function() {
-				$(this).remove();
-				// 댓글 개수 업데이트
-				var currentCount = parseInt($('.comments-count').text());
-				$('.comments-count').text(currentCount - 1);
-			});
-		},
-		error: function(err) {
-			alert("삭제에 실패했습니다.");
-			console.log(err);	
-		}
-	});		
+    if(!confirm("정말로 삭제하시겠습니까?")) {
+        return;
+    }
+    
+    var commentItem = $(this).closest('.comment-item');
+    var replyId = $(this).siblings('.reply_id').val();
+    
+    $.ajax({
+        type: 'post',
+        url: 'qnadeleteReply',
+        data: {reply_id: replyId},
+        success: function(result) {
+            // 부드러운 삭제 애니메이션
+            commentItem.fadeOut(500, function() {
+                $(this).remove();
+                // 댓글 개수 업데이트
+                var currentCount = parseInt($('.comments-count').text());
+                $('.comments-count').text(currentCount - 1);
+            });
+        },
+        error: function(err) {
+            alert("삭제에 실패했습니다.");
+            console.log(err);	
+        }
+    });		
 });
 
 // 폼 제출 시 부드러운 효과
 $('.comment-form').on('submit', function() {
-	var submitBtn = $(this).find('.comment-submit-btn');
-	submitBtn.html('<i class="fas fa-spinner fa-spin"></i> 등록 중...');
-	submitBtn.prop('disabled', true);
+    var submitBtn = $(this).find('.comment-submit-btn');
+    submitBtn.html('<i class="fas fa-spinner fa-spin"></i> 등록 중...');
+    submitBtn.prop('disabled', true);
 });
 
 });
