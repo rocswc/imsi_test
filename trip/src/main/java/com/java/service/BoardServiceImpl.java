@@ -19,8 +19,12 @@ public class BoardServiceImpl implements BoardService{
 	@Autowired
 	private BoardDAO boarddao;
 	
-	public List<BoardVO> boardList() {
-		return boarddao.boardList();
+	public List<BoardVO> boardList(Map<String, Object> param) {
+		return boarddao.boardList(param);
+	}
+
+	public Integer boardListCount() {
+		return boarddao.boardListCount();
 	}
 	
 	@Transactional
@@ -32,7 +36,7 @@ public class BoardServiceImpl implements BoardService{
 		likeVO.setHuman_id(vo.getHuman_id());
 		likeVO.setLike_count(0);
 		
-		boarddao.insertLike(likeVO);
+		/* boarddao.insertLike(likeVO); */
 	}
 
 	public BoardVO getBoard(Integer board_id) {

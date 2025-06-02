@@ -1,6 +1,5 @@
 package com.java.dao;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,11 +12,12 @@ import com.java.vo.LikeVO;
 @Mapper
 public interface BoardDAO {
 
-	public List<BoardVO> boardList();
+	public List<BoardVO> boardList(Map<String, Object> param);
+	public Integer boardListCount();
 
 	public void insertBoard(BoardVO vo);
 	
-	public void insertLike(LikeVO vo);
+	/* public void insertLike(LikeVO vo); */
 	
 	public BoardVO getBoard(Integer board_id);
 	

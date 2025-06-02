@@ -200,6 +200,30 @@
 		    <artifactId>mysql-connector-j</artifactId>
 		    <version>8.0.33</version>
 		</dependency>
+			
+
+		<!-- DB연동 -->
+		<!-- https://mvnrepository.com/artifact/com.oracle.database.security/osdt_core -->
+		<dependency>
+		    <groupId>com.oracle.database.security</groupId>
+		    <artifactId>osdt_core</artifactId>
+		    <version>19.7.0.0</version>
+		</dependency>
+					
+		<!-- https://mvnrepository.com/artifact/com.oracle.ojdbc/osdt_cert -->
+		<dependency>
+		    <groupId>com.oracle.ojdbc</groupId>
+		    <artifactId>osdt_cert</artifactId>
+		    <version>19.3.0.0</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.oracle.ojdbc/oraclepki -->
+		<dependency>
+		    <groupId>com.oracle.ojdbc</groupId>
+		    <artifactId>oraclepki</artifactId>
+		    <version>19.3.0.0</version>
+		</dependency>
+
 
 		<!-- 오라클 드라이버  -->
 		<dependency>

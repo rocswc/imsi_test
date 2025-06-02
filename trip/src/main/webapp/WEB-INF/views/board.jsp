@@ -54,11 +54,11 @@ body {
 /* 로고 스타일 */
 .logo-image {
     position: absolute;
-    left: 40px;
-    top: 25px;
+    left: 20px;
+    top: 5px;
     display: flex;
     align-items: center;
-    width: 40px;
+    width: 120px;
     height: auto;
 }
 
@@ -185,7 +185,6 @@ body {
   width: 100%;
 }
 
-
 /* 커뮤니티(board) 정보 표시 영역 스타일 */
 .container {
     max-width: 1600px;
@@ -193,19 +192,7 @@ body {
     padding: 20px;
 }
 
-/* 슬라이드 컨테이너 스타일 */
-.slider-container {
-    width: 100%;
-    overflow: hidden;
-    margin-bottom: 40px;
-}
-
-.slider {
-    display: flex;
-    transition: transform 0.5s ease;
-}
-
-/* 여러 슬라이드 섹션 구분용 */
+/* 섹션 헤더 */
 .section-header {
     display: flex;
     justify-content: space-between;
@@ -220,7 +207,7 @@ body {
     font-weight: bold;
 }
 
-/* 작성 버튼 스타일 추가 */
+/* 작성 버튼 스타일 */
 .section-header button {
     padding: 5px 10px;
     background-color: #fff;
@@ -239,29 +226,22 @@ body {
     border-color: #191919;
 }
 
-.section {
+/* 게시글 그리드 레이아웃 */
+.board-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
     margin-bottom: 40px;
-    max-width: 1600px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
-/* 카드 이미지 슬라이드 */
+/* 카드 스타일 */
 .card {
-    flex: 0 0 calc(25% - 15px);
-    min-width: 383px;
-    max-width: 383px;
-    margin: 0 7.5px;
     border: 1px solid #ddd;
+    border-radius: 8px;
     overflow: hidden;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     cursor: pointer;
     background: #fff;
-    border-radius: 8px;
-}
-
-.card:hover {
-	cursor: pointer;
 }
 
 .card-img-container {
@@ -269,12 +249,24 @@ body {
     position: relative;
     aspect-ratio: 4/3;
     overflow: hidden;
+    background-color: #f5f5f5;
 }
 
 .card-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.no-image {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+    color: #666;
+    font-size: 14px;
 }
 
 .card-content {
@@ -302,6 +294,9 @@ body {
     margin: 0 0 10px 0;
     color: #333;
     line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .card-info {
@@ -335,14 +330,60 @@ body {
     color: #156206;
 }
 
-/* bxSlider 커스터마이징 */
-.bx-wrapper {
-    max-width: 100% !important;
-    margin: 0 auto !important;
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
 }
 
-.bx-wrapper .bx-viewport {
-    left: 0 !important;
+.page-btn {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    color: #333;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    min-width: 45px;
+    text-align: center;
+    display: inline-block;
+}
+
+.page-btn:hover {
+	cursor: pointer;
+    background-color: #f5f5f5;
+    border-color: #999;
+    text-decoration: none;
+}
+
+.page-btn.active {
+    background-color: #f5f5f5;
+    color: #333;
+    border-color: #999;
+}
+
+/* 게시글 없을 때 */
+.no-posts {
+    text-align: center;
+    padding: 60px 20px;
+    color: #666;
+}
+
+.no-posts i {
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: #ddd;
+}
+
+.no-posts h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.no-posts p {
+    font-size: 14px;
 }
 
 </style>
@@ -354,7 +395,7 @@ body {
 
 		<!-- 로고 -->
 		<div class="logo">
-		<img class="logo-image" alt="로고이미지" src="/trip/resources/images/main_logo.jpg">
+		<img class="logo-image" alt="로고이미지" src="/trip/resources/images/main_logo2.png">
 			<h1><a href="index2.jsp">동틀무렵</a></h1>
 		</div>
 				
@@ -392,98 +433,120 @@ body {
 	</header>
 	<!-- 헤더 끝 -->
 
-  <!-- 게시판 컨텐츠 영역 -->
-        <div class="container">
-            	<div class="section-header">
-                	<h2 class="section-title">최신 게시글</h2>
-                	<button onclick="location.href='boardInsert'">작성</button>   
-                </div>
-         </div>
-            
-             
-          <div class="section">
-              <div class="slider-container">
+    <!-- 게시판 컨텐츠 영역 -->
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">최신 게시글</h2>
+            <button onclick="location.href='boardInsert'">작성</button>   
+        </div>
+        
                     
-                    <div class="bxslider" id="popular-slider">
-                  		<c:forEach var="boards" items="${boardList}">
-                            <div class="card" onclick="location.href='getBoard?board_id=${boards.board_id}'">
-                                <div class="card-img-container">
-                                <c:choose>
-                                    <c:when test="${not empty boards.board_fname}">
-                                        <img src="${pageContext.request.contextPath}/resources/images/${boards.board_realfname}_${boards.board_fname}" alt="이미지" class="card-img">
-                                    </c:when>
-                                    <c:otherwise>
-                                        <img src="${pageContext.request.contextPath}/resources/images/No_image.jpg" alt="이미지" class="card-img">
-                                    </c:otherwise>
-                                </c:choose>
-                                </div>
-                                <div class="card-content">
-                                    <!-- <div class="card-header">
-                                        <span class="card-tag">#러닝 #오런완</span>
-                                    </div> -->
-                                    <h3 class="card-title">${boards.board_title}</h3>
-                                    <div class="card-info">
-                                        <div class="user-date">
-                                            <span>작성자: ${boards.human_id}</span>
-                                            <span>${boards.board_date}</span>
-                                        </div>
-                                        <div class="stats">
-                                            <!-- <div class="stat">
-                                                <span class="stat-icon">조회수</span>
-                                                <span>45</span>
-                                            </div> -->
-                                            <div class="stat">
-                                                <span class="stat-icon">댓글</span>
-                                                <span>${boards.reply_count !=null? boards.reply_count : 0}</span>
-                                            </div>
-                                            <div class="stat">
-                                                <span class="stat-icon">❤</span>
-                                                <span>${boards.like_count !=null? boards.like_count : 0}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                   </div>
-                                   
-                            </div>
-                     	</c:forEach>   
-                     </div>
-                        
-                        <!-- <div class="slider-controls">
-                            <button class="slider-button prev-button" id="popular-prev">◀</button>
-                            
-                        <div class="indicators" id="popular-indicators">
-                            <span class="indicator active" data-index="0"></span>
-                            <span class="indicator" data-index="1"></span>
-                            <span class="indicator" data-index="2"></span>
-                            <span class="indicator" data-index="3"></span>
-                            <span class="indicator" data-index="4"></span>
-                        </div>
-                            
-                            <button class="slider-button next-button" id="popular-next">▶</button>
-                        </div> -->
-                        
-                 	</div>
-          		</div>
+            <!-- 게시판 리스트 -->
+			<div id="board-list" class="board-list"></div>
+
+			<!-- 페이지네이션 -->
+			<div id="pagination" class="pagination"></div>
 			
+    </div>
 
-	<script>
-	
-	//슬라이더기능
- 	$(function(){
-	    $('.bxslider').bxSlider({
-	     //옵션 입력
-	     maxSlides: 4,
-	     minSlides: 4,
-	     mode: 'horizontal',
-	     captions: true,
-	     moveSlides: 1,
-	     infiniteLoop: false,
-	     pager: true
-	    });
-	  });
 
-	</script>
+    <script>
+    
+    loadBoardList(1);
+    
+	function loadBoardList(page){
+		const size = 8;
+		
+		$.ajax({
+			url: "boardList"
+			,type: "get"
+			,data:{
+				page: page,
+				size: size
+			}
+			,dataType: "json"
+			,success: function(response){
+				//console.log("response:", response);
+				boardList(response.boardList);
+				createPagination(response.totalPages, response.currentPage);
+			}
+			,error: function(err){
+				console.error("에러:", err);
+			}
+		});
+	}
+
+    // 게시글 불러오기
+    function boardList(list) {
+    	$("#board-list").empty();  // 기존 내용 비움
+    	if(list.length === 0 ){
+    		$("#board-list").html(`
+    			    <div class="no-posts">
+    			        <i class="fas fa-clipboard-list"></i>
+    			        <h3>게시글이 없습니다</h3>
+    			        <p>첫 번째 게시글을 작성해보세요!</p>
+    			    </div>
+    			`);
+    		return;
+    	}
+
+        var container = '<div class="board-grid">';
+
+        for (var i = 0; i < list.length; i++) {
+            var boardList = list[i];
+            var imageUrl = boardList.board_fname
+                ? "/trip/resources/images/" + boardList.board_realfname + "_" + boardList.board_fname
+                : "/trip/resources/images/No_image.jpg";
+
+            container += '<div class="card" onclick="location.href=\'getBoard?board_id=' + boardList.board_id + '\'">'
+                + '<div class="card-img-container">'
+                + '<img src="' + imageUrl + '" alt="이미지" class="card-img">'
+                + '</div>'
+                + '<div class="card-content">'
+                + '<h3 class="card-title">' + boardList.board_title + '</h3>'
+                + '<div class="card-info">'
+                + '<div class="user-date">'
+                + '<span>작성자: ' + boardList.human_id + '</span>'
+                + '<span>' + boardList.board_date + '</span>'
+                + '</div>'
+                + '<div class="stats">'
+                + '<div class="stat">'
+                + '<span class="stat-icon">댓글</span>'
+                + '<span>' + (boardList.reply_count != null ? boardList.reply_count : 0) + '</span>'
+                + '</div>'
+                + '<div class="stat">'
+                + '<span class="stat-icon">❤</span>'
+                + '<span>' + (boardList.like_count != null ? boardList.like_count : 0) + '</span>'
+                + '</div>'
+                + '</div></div></div></div>';
+        }
+
+        container += '</div>'; // board-grid 닫기
+
+        $("#board-list").append(container);
+    }
+    	
+    
+    //페이지 생성
+    function createPagination(totalPages, currentPage) {
+		$("#pagination").empty();
+		
+		for(let i = 1; i <= totalPages; i++){
+			let btn = $("<button>")
+		      .text(i)
+		      .addClass("page-btn" + (i === currentPage ? " active" : ""));
+
+		    btn.on("click", function () {
+		    	loadBoardList(i);
+		    });
+
+		    $("#pagination").append(btn);
+		  }
+	}
+    	
+ 
+    
+    </script>
     
 </body>
-
 </html>
