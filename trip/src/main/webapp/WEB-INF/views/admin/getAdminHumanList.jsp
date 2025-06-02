@@ -245,14 +245,14 @@ body {
 	font-weight: 400;
 }
 
-/* 검색 폼 */
+/* 개선된 검색 폼 */
 .search-form {
 	background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
 	border-radius: 20px;
-	padding: 30px;
+	padding: 35px;
 	margin-bottom: 30px;
 	border: 1px solid #e9ecef;
-	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
 	position: relative;
 	overflow: hidden;
 }
@@ -267,49 +267,149 @@ body {
 	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
+.search-form-header {
+	text-align: center;
+	margin-bottom: 25px;
+}
+
+.search-form-header h3 {
+	font-size: 20px;
+	font-weight: 700;
+	color: #333333;
+	margin-bottom: 8px;
+	letter-spacing: -0.5px;
+}
+
+.search-form-header p {
+	font-size: 14px;
+	color: #666666;
+	font-weight: 400;
+}
+
 .search-form form {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	gap: 15px;
+	gap: 20px;
 	flex-wrap: wrap;
 }
 
-.search-form select,
-.search-form input[type="text"] {
-	padding: 12px 20px;
+.search-input-group {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.select-wrapper {
+	position: relative;
+	min-width: 160px;
+}
+
+.search-form select {
+	width: 100%;
+	padding: 15px 20px;
+	padding-right: 45px;
 	border: 2px solid #e9ecef;
-	border-radius: 25px;
+	border-radius: 50px;
 	font-size: 14px;
 	font-weight: 500;
 	transition: all 0.3s ease;
 	background: white;
+	appearance: none;
+	cursor: pointer;
+	color: #555555;
+}
+
+.select-wrapper::after {
+	content: '\f078';
+	font-family: 'Font Awesome 6 Free';
+	font-weight: 900;
+	position: absolute;
+	right: 18px;
+	top: 50%;
+	transform: translateY(-50%);
+	color: #667eea;
+	pointer-events: none;
+	font-size: 12px;
+}
+
+.input-wrapper {
+	position: relative;
+	min-width: 280px;
+	flex: 1;
+	max-width: 400px;
+}
+
+.search-form input[type="text"] {
+	width: 100%;
+	padding: 15px 20px;
+	padding-left: 50px;
+	border: 2px solid #e9ecef;
+	border-radius: 50px;
+	font-size: 14px;
+	font-weight: 500;
+	transition: all 0.3s ease;
+	background: white;
+	color: #555555;
+}
+
+.input-wrapper::before {
+	content: '\f002';
+	font-family: 'Font Awesome 6 Free';
+	font-weight: 900;
+	position: absolute;
+	left: 20px;
+	top: 50%;
+	transform: translateY(-50%);
+	color: #999999;
+	pointer-events: none;
+	font-size: 14px;
+	z-index: 1;
 }
 
 .search-form select:focus,
 .search-form input[type="text"]:focus {
 	outline: none;
 	border-color: #667eea;
-	box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+	box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+	transform: translateY(-1px);
+}
+
+.search-form input[type="text"]:focus + .input-wrapper::before {
+	color: #667eea;
+}
+
+.search-btn-wrapper {
+	position: relative;
 }
 
 .search-form input[type="submit"] {
-	padding: 12px 30px;
+	padding: 15px 35px;
 	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 	color: white;
 	border: none;
-	border-radius: 25px;
+	border-radius: 50px;
 	font-weight: 600;
 	font-size: 14px;
 	cursor: pointer;
 	transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 	letter-spacing: 0.5px;
-	box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+	box-shadow: 0 4px 20px rgba(102, 126, 234, 0.25);
+	position: relative;
+	overflow: hidden;
+	min-width: 120px;
 }
 
 .search-form input[type="submit"]:hover {
 	transform: translateY(-2px);
-	box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+	box-shadow: 0 8px 25px rgba(102, 126, 234, 0.35);
+}
+
+.search-form input[type="submit"]:active {
+	transform: translateY(0);
+	box-shadow: 0 4px 15px rgba(102, 126, 234, 0.25);
 }
 
 /* 테이블 컨테이너 */
@@ -451,16 +551,20 @@ body {
 		padding: 30px 25px;
 	}
 	
-	.search-form form {
+	.search-input-group {
 		flex-direction: column;
 		align-items: stretch;
+		gap: 15px;
 	}
 	
-	.search-form select,
-	.search-form input[type="text"],
+	.select-wrapper,
+	.input-wrapper {
+		min-width: auto;
+		max-width: none;
+	}
+	
 	.search-form input[type="submit"] {
 		width: 100%;
-		margin-bottom: 10px;
 	}
 }
 
@@ -494,6 +598,10 @@ body {
 		font-size: 28px;
 	}
 	
+	.search-form {
+		padding: 25px 20px;
+	}
+	
 	.table-container {
 		overflow-x: auto;
 	}
@@ -521,6 +629,19 @@ body {
 
 .table-container {
 	animation-delay: 0.2s;
+}
+
+/* 부드러운 그라데이션 효과 */
+@keyframes gradientShift {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 </style>
 
@@ -581,16 +702,24 @@ $(".modify").on("click",function() {
 				<p>동틀무렵 서비스 회원들의 정보를 관리하고 조회하세요</p>
 			</div>
 
-			<!-- 검색 폼 -->
+			<!-- 개선된 검색 폼 -->
 			<div class="search-form">
-				<form name="form1" method="post" action="getAdminHumanList">	
-					<select name="searchOption">
-					   <option value="human_name" <c:out value="${searchOption == 'human_name'?'selected':''}"/> >회원명</option>
-					   <option value="human_blacklist" <c:out value="${searchOption == 'human_blacklist'?'selected':''}"/> >블랙리스트</option>
-					   <option value="human_state" <c:out value="${searchOption == 'human_state'?'selected':''}"/> >회원상태</option>
-					</select>
-					<input name="keyword" value="${keyword}" placeholder="검색어를 입력하세요">
-					<input type="submit" value="조회">
+				<form name="form1" method="post" action="getAdminHumanList">
+					<div class="search-input-group">
+						<div class="select-wrapper">
+							<select name="searchOption">
+							   <option value="human_name" <c:out value="${searchOption == 'human_name'?'selected':''}"/> >회원명</option>
+							   <option value="human_blacklist" <c:out value="${searchOption == 'human_blacklist'?'selected':''}"/> >블랙리스트</option>
+							   <option value="human_state" <c:out value="${searchOption == 'human_state'?'selected':''}"/> >회원상태</option>
+							</select>
+						</div>
+						<div class="input-wrapper">
+							<input name="keyword" value="${keyword}" placeholder="검색어를 입력하세요" type="text">
+						</div>
+						<div class="search-btn-wrapper">
+							<input type="submit" value="검색하기">
+						</div>
+					</div>
 				</form>
 			</div>
 	
@@ -631,11 +760,11 @@ $(".modify").on("click",function() {
 					      </td>
 					      <td>
 					      	<c:choose>
-					      		<c:when test="${item.human_state == '활성'}">
-					      			<span class="status-label status-active">활성</span>
+					      		<c:when test="${item.human_state == 'normal'}">
+					      			<span class="status-label status-active">정상</span>
 					      		</c:when>
-					      		<c:when test="${item.human_state == '휴면'}">
-					      			<span class="status-label status-dormant">휴면</span>
+					      		<c:when test="${item.human_state == 'delete'}">
+					      			<span class="status-label status-dormant">탈퇴</span>
 					      		</c:when>
 					      		<c:otherwise>
 					      			<span class="status-label status-inactive">비활성</span>
