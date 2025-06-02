@@ -584,8 +584,7 @@ body {
 		<div class="left-section">
 			<div class="walking-course">
 				<div class="course-header">
-					<h3>산책코스</h3>
-					<button id="bookmark-btn" class="bookmark-btn">북마크</button>
+					<h3>명소</h3>
 				</div>
 				<div class="info-form">
 					<input type="hidden" id="walking-id">
@@ -642,7 +641,7 @@ body {
 
 		document.getElementById("walking-id").value = course.hotspot_id;
 		document.getElementById("course-name").value = course.hotspot_name;
-		document.getElementById("course-distance").value = course.hotspot_distance;
+		
 		document.getElementById("course-info").innerText = course.hotspot_info;
 
 		var newCenter = new kakao.maps.LatLng(course.hotspot_latitude, course.hotspot_longitude);
@@ -905,6 +904,7 @@ body {
 				$(".nav-menu ul li:nth-child(5) a").text("Hotspots");
 				$(".nav-menu ul li:nth-child(6) a").text("Community");
 				$(".nav-menu ul li:nth-child(7) a").text("My Page");
+				$(".nav-menu ul li:nth-child(8) a").text("My Bookmark");
 				$(".login-btn").text("Logout");
 				$(".login-btn2").text("Modification of information");
 			},

@@ -919,6 +919,7 @@ body {
 				$(".nav-menu ul li:nth-child(5) a").text("Hotspots");
 				$(".nav-menu ul li:nth-child(6) a").text("Community");
 				$(".nav-menu ul li:nth-child(7) a").text("My Page");
+				$(".nav-menu ul li:nth-child(8) a").text("My Bookmark");
 				$(".login-btn").text("Logout");
 				$(".login-btn2").text("Modification of information");
 			},
