@@ -82,6 +82,6 @@ public class KakaoController {
         // 4. 세션에 저장
         session.setAttribute("loginUser", kakaoUser);
 
-        return "redirect:/index.jsp";
+        return "redirect:/index2.jsp";
     }
 }
