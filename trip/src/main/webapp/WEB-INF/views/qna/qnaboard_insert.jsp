@@ -397,7 +397,7 @@ body {
 			<form class="board-form" action="qnaBoardRegister" method="post">
 				<div class="board-title-container">
 					<h2 class="board-title">1:1 문의 등록</h2>
-					<div class="button-group">
+					 <div class="button-group">
 						<button type="button" class="btn btn-cancel">취소</button>		
 						<button type="submit" class="btn btn-submit" id="submitBtn">등록</button>
 					</div>

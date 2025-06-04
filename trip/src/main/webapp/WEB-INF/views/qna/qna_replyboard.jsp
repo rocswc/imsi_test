@@ -178,6 +178,7 @@ body {
   width: 100%;
 }
 
+
 /* 메인 콘텐츠 영역 스타일 */
 .main-content {
 	flex: 1;
@@ -267,12 +268,12 @@ body {
     line-height: 1.6;
 }
 
-.button-group {
+/* .button-group {
     display: flex;
     justify-content: flex-end;
     gap: 12px;
     margin-top: 20px;
-}
+} */
 
 .btn {
     padding: 12px 24px;
@@ -642,7 +643,7 @@ body {
 		<!-- 로고 -->
 		<div class="logo">
 		<img class="logo-image" alt="로고이미지" src="/trip/resources/images/main_logo.png">
-			<h1><a href="index.jsp">동틀무렵</a></h1>
+			<h1><a href="/trip/index2.jsp">동틀무렵</a></h1>
 		</div>
 				
 		<!-- 로그인/회원가입 버튼 - 우상단 -->
@@ -650,7 +651,8 @@ body {
 			<c:choose>
 				<c:when test="${not empty sessionScope.loginUser}">
 					<p>${sessionScope.loginUser.human_id}님 환영합니다!</p>
-					<button class="login-btn" onclick="location.href='logout'">로그아웃</button>
+					<button class="login-btn" onclick="location.href='/trip/logout'">로그아웃</button>
+					<button class="login-btn2" onclick="location.href='/trip/memberUpdate'">정보수정</button>
 				</c:when>
 				<c:otherwise>
 					<button class="login-btn" onclick="location.href='getHuman'">로그인</button>
@@ -664,13 +666,14 @@ body {
 			<!-- 중앙 메뉴 -->
 			<div class="nav-menu">
 				<ul>
-					<li><a href="walking">산책코스</a></li>
-					<li><a href="running">러닝코스</a></li>
-					<li><a href="hiking">등산코스</a></li>
-					<li><a href="game">대회정보</a></li>
-					<li><a href="hotspot">주변명소</a></li>
-					<li><a href="board">커뮤니티</a></li>
-					<li><a href="bookmark_walking">마이페이지</a></li>
+					<li><a href="/trip/walking_redesign">산책코스</a></li>
+					<li><a href="/trip/running">러닝코스</a></li>
+					<li><a href="/trip/hiking">등산코스</a></li>
+					<li><a href="/trip/game">대회정보</a></li>
+					<li><a href="/trip/hotspot">주변명소</a></li>
+					<li><a href="/trip/board">커뮤니티</a></li>
+					<li><a href="qna_list">QnA</a></li>
+					<li><a href="/trip/bookmark">나의 북마크</a></li>
 				</ul>
 			</div>
 		</div>
@@ -682,10 +685,10 @@ body {
 		<div class="board-container">
 			<div class="board-title-container">
 				<h2 class="board-title">1:1 문의</h2>
-				<div class="button-group">
+				<!-- <div class="button-group">
 					<button type="button" class="btn btn-cancel">취소</button>
 					<button type="submit" class="btn btn-submit" id="submitBtn">수정</button>
-				</div>
+				</div> -->
 			</div>
 						
 			<div class="form-group">

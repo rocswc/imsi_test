@@ -371,14 +371,14 @@ body {
 						<div class="qna-content">
 							${item.board_content}
 						</div>
-						<c:choose>
+						<%-- <c:choose>
 							<c:when test="${item.board_status == 'pending'}">
 								<span class="qna-status status-pending">답변대기</span>
 							</c:when>
 							<c:otherwise>
 								<span class="qna-status status-answered">답변완료</span>
 							</c:otherwise>
-						</c:choose>
+						</c:choose> --%>
 					</div>
 				</c:forEach>
 			</div>

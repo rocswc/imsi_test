@@ -279,9 +279,10 @@
                     <label for="hintType">비밀번호 힌트</label>
                     <select id="hintType" name="hint_type" class="form-control">
                      <option value="">힌트 유형 선택</option>
-                        <option>첫사랑 이름은?</option>
-		     			<option>친한 친구 이름은?</option>
-		      			<option>좋아하는 영화는?</option>
+                      <option>내가 졸업한 초등학교는?</option>
+				      <option>첫사랑 이름은?</option>
+				      <option>내가 태어난 고향은?</option>
+				      <option>나의 보물 1호는?</option>
             	    </select>
                 </div>
                 
