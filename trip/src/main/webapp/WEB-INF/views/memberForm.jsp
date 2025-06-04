@@ -21,7 +21,7 @@
       font-family: var(--font-main);
       margin: 0;
       padding: 0;
-      background-color: var(--light-beige);
+      background-color: #f8f9fa;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -38,7 +38,7 @@
     }
 
     .signup-title {
-      color: var(--primary-green);
+      color: #000;
       font-size: 24px;
       font-weight: bold;
       text-align: center;
@@ -55,13 +55,13 @@
       padding: 12px;
       border: 1px solid #ddd;
       border-radius: 6px;
-      font-size: 16px;
+      font-size: 15px;
       box-sizing: border-box;
       transition: border-color 0.3s;
     }
 
     .input-field:focus, .select-field:focus {
-      border-color: var(--light-green);
+      border-color: #999;
       outline: none;
     }
 
@@ -72,13 +72,14 @@
 
     .btn {
       padding: 10px 15px;
-      background-color: #000;
+      background-color: #333333;
       color: white;
       border: none;
       border-radius: 6px;
       cursor: pointer;
       font-size: 14px;
       font-weight: 600;
+      width: 100px;
     }
 
     .signup-btn {
@@ -87,7 +88,7 @@
       background-color: #000;
       color: white;
       border: none;
-      border-radius: 28px;
+      border-radius: 6px;
       font-size: 16px;
       font-weight: 600;
       margin-top: 25px;
@@ -165,7 +166,8 @@
 		      <option value="" disabled selected>아이디 찾기용 질문을 선택하세요</option>
 		      <option>어릴적 별명은?</option>
 		      <option>반려견 이름은?</option>
-		      <option>자신의 고향은?</option>
+		      <option>내가 가장 좋아하는 영화는?</option>
+		      <option>친한 친구 이름은?</option>
 		     </select>
 	  </div>
       <div class="form-group">
@@ -175,9 +177,10 @@
       <div class="form-group">
 	      <select class="select-field">
 		      <option value="" disabled selected>비밀번호 찾기용 질문을 선택하세요</option>
+		      <option>내가 졸업한 초등학교는?</option>
 		      <option>첫사랑 이름은?</option>
-		      <option>친한 친구 이름은?</option>
-		      <option>좋아하는 영화는?</option>
+		      <option>내가 태어난 고향은?</option>
+		      <option>나의 보물 1호는?</option>
 	      </select>
 	  </div>
       <div class="form-group">

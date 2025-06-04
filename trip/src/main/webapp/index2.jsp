@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<title>동틀무렴 - 메인페이지</title>
+<title>동틀무렵 - 메인페이지</title>
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 	rel="stylesheet">
@@ -26,7 +26,7 @@
 }
 
 body {
-   width: 1920px;
+   width: 1905px;
    background-color: #f8f9fa;
    min-height: 100vh;
    line-height: 1.6;
@@ -47,11 +47,11 @@ body {
 /* 로고 스타일 */
 .logo-image {
     position: absolute;
-    left: 40px;
-    top: 25px;
+    left: 30px;
+    top: 15px;
     display: flex;
     align-items: center;
-    width: 40px;
+    width: 110px;
     height: auto;
 }
 
@@ -202,9 +202,11 @@ body {
    display: flex;
    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
    height: 100%;
+   width: 100%;
 }
 
 .slide {
+   flex: 0 0 100%;
    min-width: 100%;
    height: 100%;
    background-size: cover;
@@ -600,10 +602,6 @@ body {
 
 </style>
 </head>
-<body><!-- 좌측 사이드바 -->
-	
-	
-	
 	
 
 	<!-- 헤더 시작 -->
@@ -611,7 +609,7 @@ body {
 
 		<!-- 로고 -->
 		<div class="logo">
-		<img class="logo-image" alt="로고이미지" src="/trip/resources/images/main_logo.jpg">
+		<img class="logo-image" alt="로고이미지" src="/trip/resources/images/main_logo.png">
 			<h1><a href="index2.jsp">동틀무렵</a></h1>
 		</div>
 				
@@ -655,10 +653,10 @@ body {
 		<div class="slider-container">
 			<div class="slider">
 				<div class="slide"
-					style="background-image: url('resources/images/main_image1.jpg');">
+					style="background-image: url('resources/images/main_image.jpg');">
 					<div class="slide-content">
-						<h2>서울 숲 힐링 산책로</h2>
-						<p>도심 속 자연을 느낄 수 있는 서울 숲의 아름다운 산책로를 만나보세요.</p>
+						<h2>한강 뷰 러닝 코스</h2>
+						<p>불빛 가득한 한강 야경을 달리며 하루의 피로를 씻어보세요.</p>
 						<div class="search-container">
 							<input type="text" class="search-box" placeholder="무엇이든 물어보세요!" onclick="location.href='chatbot'">
 							<i class="fas fa-search search-icon"></i>
@@ -668,15 +666,15 @@ body {
 				<div class="slide"
 					style="background-image: url('resources/images/main_image2.jpg');">
 					<div class="slide-content">
-						<h2>한강변 러닝 코스</h2>
-						<p>탁 트인 전망과 함께하는 한강변 러닝 코스로 활기찬 하루를 시작해보세요.</p>
+						<h2>서울 숲 힐링 산책로</h2>
+						<p>도심 속 자연을 느낄 수 있는 서울 숲의 아름다운 산책로를 만나보세요.</p>
 					</div>
 				</div>
 				<div class="slide"
 					style="background-image: url('resources/images/main_image3.jpg');">
 					<div class="slide-content">
-						<h2>북한산 등산로</h2>
-						<p>도전과 성취감을 느낄 수 있는 북한산의 다양한 등산 코스를 경험해보세요.</p>
+						<h2>한라산 등산로</h2>
+						<p>도전과 성취감을 느낄 수 있는 한라산의 다양한 등산 코스를 경험해보세요.</p>
 					</div>
 				</div>
 			</div>
@@ -810,70 +808,51 @@ body {
 	</div>
 	
 	
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const slider = document.querySelector('.slider');
+    const slides = document.querySelectorAll('.slide');
+    const prevArrow = document.querySelector('.prev');
+    const nextArrow = document.querySelector('.next');
+    const dotsContainer = document.querySelector('.slider-dots');
 
-	<script>
-		// 슬라이더 기능 구현
-		document.addEventListener('DOMContentLoaded', function() {
-			const slider = document.querySelector('.slider');
-			const slides = document.querySelectorAll('.slide');
-			const dots = document.querySelectorAll('.dot');
-			const prevArrow = document.querySelector('.prev');
-			const nextArrow = document.querySelector('.next');
-			
-			let currentSlide = 0;
-			const slideCount = slides.length;
-			
-			// 슬라이드 이동 함수
-			function goToSlide(index) {
-				if (index < 0) {
-					index = slideCount - 1;
-				} else if (index >= slideCount) {
-					index = 0;
-				}
-				
-				slider.style.transform = `translateX(-${index * 100}%)`;
-				
-				// 액티브 닷 업데이트
-				dots.forEach(dot => dot.classList.remove('active'));
-				dots[index].classList.add('active');
-				
-				currentSlide = index;
-			}
-			
-			// 이벤트 리스너 설정
-			prevArrow.addEventListener('click', () => {
-				goToSlide(currentSlide - 1);
-			});
-			
-			nextArrow.addEventListener('click', () => {
-				goToSlide(currentSlide + 1);
-			});
-			
-			// 닷 클릭 이벤트
-			dots.forEach((dot, index) => {
-				dot.addEventListener('click', () => {
-					goToSlide(index);
-				});
-			});
-			
-			// 자동 슬라이드 기능
-			let slideInterval = setInterval(() => {
-				goToSlide(currentSlide + 1);
-			}, 5000);
-			
-			// 슬라이드 컨테이너에 마우스 오버 시 자동 슬라이드 정지
-			const sliderContainer = document.querySelector('.slider-container');
-			
-			sliderContainer.addEventListener('mouseenter', () => {
-				clearInterval(slideInterval);
-			});
-			
-			sliderContainer.addEventListener('mouseleave', () => {
-				slideInterval = setInterval(() => {
-					goToSlide(currentSlide + 1);
-				}, 5000);
-			});
-		});
-	</script>
+    let currentSlide = 0;
+    const slideCount = slides.length;
+
+    // Dot 초기화
+    dotsContainer.innerHTML = '';
+    slides.forEach((_, index) => {
+      const dot = document.createElement('div');
+      dot.classList.add('dot');
+      if (index === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => goToSlide(index));
+      dotsContainer.appendChild(dot);
+    });
+
+    const dots = document.querySelectorAll('.dot');
+
+    function goToSlide(index) {
+      if (index < 0) index = slideCount - 1;
+      else if (index >= slideCount) index = 0;
+
+      slider.style.transform = `translateX(-${index * 100}%)`;
+      dots.forEach(dot => dot.classList.remove('active'));
+      dots[index].classList.add('active');
+      currentSlide = index;
+    }
+
+    prevArrow.addEventListener('click', () => goToSlide(currentSlide - 1));
+    nextArrow.addEventListener('click', () => goToSlide(currentSlide + 1));
+
+    // 자동 슬라이드
+    let slideInterval = setInterval(() => goToSlide(currentSlide + 1), 5000);
+    const sliderContainer = document.querySelector('.slider-container');
+
+    sliderContainer.addEventListener('mouseenter', () => clearInterval(slideInterval));
+    sliderContainer.addEventListener('mouseleave', () => {
+      slideInterval = setInterval(() => goToSlide(currentSlide + 1), 5000);
+    });
+  });
+</script>
 </body>
 </html>

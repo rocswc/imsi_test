@@ -26,7 +26,7 @@
 }
 
 body {
-   width: 1920px;
+   width: 1905px;
    background-color: #f8f9fa;
    min-height: 100vh;
    line-height: 1.6;
@@ -47,10 +47,12 @@ body {
 /* 로고 스타일 */
 .logo-image {
     position: absolute;
-    left: 40px;
-    top: 25px;
+    left: 30px;
+    top: 15px;
     display: flex;
     align-items: center;
+    width: 110px;
+    height: auto;
 }
 
 .logo {
@@ -639,7 +641,7 @@ body {
 	<header class="header">
 		<!-- 로고 -->
 		<div class="logo">
-		<img class="logo-image" alt="로고이미지" src="">
+		<img class="logo-image" alt="로고이미지" src="/trip/resources/images/main_logo.png">
 			<h1><a href="index.jsp">동틀무렵</a></h1>
 		</div>
 				

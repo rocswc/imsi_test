@@ -18,7 +18,7 @@
         }
         
         body {
-            background-color: #F3F2F1;
+            background-color: #f8f9fa;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -37,7 +37,7 @@
         .logo {
             font-size: 24px;
             font-weight: 700;
-            color: #426B1F;
+            color: #000000;
             margin-bottom: 20px;
         }
         
@@ -68,7 +68,7 @@
         }
         
         .step.active {
-            background-color: #426B1F;
+            background-color: #333333;
             color: white;
         }
         
@@ -87,7 +87,7 @@
         }
         
         .step.active::after {
-            background-color: #426B1F;
+            background-color: #111111;
         }
         
         .form-group {
@@ -105,22 +105,21 @@
         .form-control {
             width: 100%;
             padding: 12px 15px;
-            border: 1px solid #ddd;
+            border: 1px solid #999999;
             border-radius: 5px;
             font-size: 15px;
             transition: all 0.3s;
         }
         
         .form-control:focus {
-            border-color: #426B1F;
+            border-color: #222222;
             outline: none;
-            box-shadow: 0 0 0 2px rgba(66, 107, 31, 0.2);
         }
         
         .next-btn {
             width: 100%;
             padding: 12px;
-            background-color: #426B1F;
+            background-color: #111111;
             color: white;
             border: none;
             border-radius: 5px;
@@ -128,11 +127,11 @@
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s;
-            margin-top: 10px;
+            margin-top: 20px;
         }
         
         .next-btn:hover {
-            background-color: #365818;
+            background-color: #222222;
         }
         
         .back-link {
@@ -152,7 +151,7 @@
         }
         
         .back-link:hover {
-            color: #426B1F;
+            color: #444;
         }
         
         .result-container {
@@ -177,14 +176,14 @@
             padding: 15px;
             border-radius: 5px;
             margin-bottom: 20px;
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 500;
         }
         
         .login-btn {
             display: inline-block;
             padding: 12px 30px;
-            background-color: #426B1F;
+            background-color: #111111;
             color: white;
             border: none;
             border-radius: 5px;
@@ -196,7 +195,7 @@
         }
         
         .login-btn:hover {
-            background-color: #365818;
+            opacity: 90%;
         }
         
         /* 반응형 */
@@ -241,7 +240,7 @@
                     <label for="email">이메일</label>
                     <input type="email" id="email" name = "human_email" value ="${human.human_email}" class="form-control" placeholder="가입 시 등록한 이메일을 입력하세요">
                 </div>
-                <div id = "loginerr" style="display: none; color: red;" >입력하신 정보와 일치하는 아이디는 없습니다</div>
+                <div id = "loginerr" style="display: none; color: red; font-size: 15px;" >입력하신 정보와 일치하는 아이디는 없습니다</div>
                 <button type="button" id="nextBtn"   class="next-btn">확인</button>
             </form>
         </div>

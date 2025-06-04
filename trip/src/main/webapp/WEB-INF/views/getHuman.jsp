@@ -21,7 +21,7 @@
         }
         
         body {
-            background-color: #F3F2F1;
+            background-color: #f8f9fa;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -40,7 +40,7 @@
         .logo {
             font-size: 24px;
             font-weight: 700;
-            color: #426B1F;
+            color: #000;
             margin-bottom: 30px;
         }
         
@@ -66,15 +66,14 @@
         }
         
         .form-control:focus {
-            border-color: #426B1F;
+            border-color: #999;
             outline: none;
-            box-shadow: 0 0 0 2px rgba(66, 107, 31, 0.2);
         }
         
         .login-btn {
             width: 100%;
             padding: 12px;
-            background-color: #426B1F;
+            background-color: #111;
             color: white;
             border: none;
             border-radius: 5px;
@@ -86,24 +85,28 @@
         }
         
         .login-btn:hover {
-            background-color: #365818;
+            background-color: #333;
         }
         
         .links {
             margin-top: 25px;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;       /* 수평 중앙 정렬 */
+		    align-items: center;           /* 세로축 중앙 */
+		    gap: 20px;                     /* 요소 사이 간격 */
             font-size: 14px;
         }
         
         .links a {
             color: #666;
             text-decoration: none;
+            display: flex;               /* 아이콘, 텍스트 중앙 정렬용 */
+    		align-items: center;
             transition: all 0.3s;
         }
         
         .links a:hover {
-            color: #426B1F;
+            color: #444;
             text-decoration: underline;
         }
         
@@ -129,8 +132,8 @@
             width: 100%;
             padding: 12px;
             background-color: white;
-            color: #426B1F;
-            border: 1px solid #426B1F;
+            color: #333;
+            border: 1px solid #333;
             border-radius: 5px;
             font-size: 16px;
             font-weight: 500;
@@ -141,7 +144,7 @@
         }
         
         .register-btn:hover {
-            background-color: #f8f9f7;
+            background-color: #f6f6f6;
         }
         
         .back-link {
@@ -161,20 +164,13 @@
         }
         
         .back-link:hover {
-            color: #426B1F;
+            color: #444;
         }
         
-        /* 반응형 */
-        @media (max-width: 480px) {
-            .login-container {
-                width: 90%;
-                padding: 30px 20px;
-            }
-        }
     </style>
 </head>
 <body>
-    <a href="index" class="back-link">
+    <a href="index2.jsp" class="back-link">
         <i class="fas fa-arrow-left"></i> 홈으로 돌아가기
     </a>
     
@@ -196,11 +192,11 @@
             
             <button type="submit" class="login-btn">로그인</button>
             
-            <div id="login_msg" style="color:red; font-weight:bold; margin-top:10px;"></div>
+            <div id="login_msg" style="color:red; font-size:15px; font-weight:bold; margin-top:10px;"></div>
             
             <div class="links">
             <a href="https://kauth.kakao.com/oauth/authorize?client_id=0b582480692a1acc336163c086a3eb8d&redirect_uri=http://localhost:8080/trip/kakaoLogin&response_type=code">
-   			 <img src="/trip/resources/images/kakao.jpg" />
+   			 <img src="/trip/resources/images/kakao.png" />
    			 </a>
                 <a href="getHumanId">아이디 찾기</a>
                 <a href="getHumanPass">비밀번호 찾기</a>

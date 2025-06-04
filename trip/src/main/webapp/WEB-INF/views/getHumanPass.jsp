@@ -18,7 +18,7 @@
         }
         
         body {
-            background-color: #F3F2F1;
+            background-color: #f8f9fa;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -37,7 +37,7 @@
         .logo {
             font-size: 24px;
             font-weight: 700;
-            color: #426B1F;
+            color: #000000;
             margin-bottom: 20px;
         }
         
@@ -68,7 +68,7 @@
         }
         
         .step.active {
-            background-color: #426B1F;
+            background-color: #333333;
             color: white;
         }
         
@@ -87,7 +87,7 @@
         }
         
         .step.active::after {
-            background-color: #426B1F;
+            background-color: #999;
         }
         
         .form-group {
@@ -112,15 +112,14 @@
         }
         
         .form-control:focus {
-            border-color: #426B1F;
+            border-color: #999999;
             outline: none;
-            box-shadow: 0 0 0 2px rgba(66, 107, 31, 0.2);
         }
         
         .next-btn {
             width: 100%;
             padding: 12px;
-            background-color: #426B1F;
+            background-color: #222222;
             color: white;
             border: none;
             border-radius: 5px;
@@ -132,7 +131,7 @@
         }
         
         .next-btn:hover {
-            background-color: #365818;
+            opacity: 90%;
         }
         
         .back-link {
@@ -152,7 +151,7 @@
         }
         
         .back-link:hover {
-            color: #426B1F;
+            color: #444;
         }
         
         .result-container {
@@ -187,9 +186,8 @@
         }
         
         .hint-answer:focus {
-            border-color: #426B1F;
+            border-color: #222222;
             outline: none;
-            box-shadow: 0 0 0 2px rgba(66, 107, 31, 0.2);
         }
         
         .password-reset-form {
@@ -214,7 +212,7 @@
         }
         
         .success-message {
-            color: #426B1F;
+            color: #222222;
             font-weight: 500;
             margin-bottom: 15px;
         }
@@ -222,7 +220,7 @@
         .login-btn {
             display: inline-block;
             padding: 12px 30px;
-            background-color: #426B1F;
+            background-color: #111111;
             color: white;
             border: none;
             border-radius: 5px;
@@ -234,7 +232,7 @@
         }
         
         .login-btn:hover {
-            background-color: #365818;
+            opacity: 90%;
         }
         
         /* 반응형 */

@@ -26,7 +26,7 @@
 }
 
 body {
-   width: 1920px;
+   width: 1905px;
    background-color: #f8f9fa;
    min-height: 100vh;
    line-height: 1.6;
@@ -47,11 +47,11 @@ body {
 /* 로고 스타일 */
 .logo-image {
     position: absolute;
-    left: 40px;
-    top: 25px;
+    left: 30px;
+    top: 15px;
     display: flex;
     align-items: center;
-    width: 40px;
+    width: 110px;
     height: auto;
 }
 
@@ -152,7 +152,7 @@ body {
   text-decoration: none;
   color: #333333;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 17px;
   transition: all 0.3s ease;
   position: relative;
   padding: 8px 0;
@@ -253,90 +253,62 @@ body {
 .banner-image {
   width: 100%;
   height: 200px;
-  background: #156206;
+  background: url('/trip/resources/images/running_banner3.jpg') center/cover no-repeat;
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  font-size: 24px;
-  font-weight: 700;
+  color: black;
+  font-size: 32px;
+  font-weight: bold;
   text-align: center;
 }
 
-.info-form {
-	width: 100%;
-    max-width: 1000px;
-}
-
-.info-item {
- 	display: flex;
-    margin-bottom: 15px;
-}
-
-.info-item label {
-    display: inline-block;
-    font-weight: 500;
-    color: #333;
-    margin-right: 10px;
-    width : 70px;
-}
-
-.info-item input[type="text"] {
-    border: none;
-    background-color: #FFFFFA;
-    font-size: 15px;
-}
-
-.info-item input[type="text"]:focus {
-    outline: none; /* 포커스 테두리 제거 */
-}
-
-.divider {
-  width: 100%;
-  height: 1px;
-  background-color: #EAEAEA;
-  margin: 20px 0;
-}
-
-#course-info {
-    width: 800px;
-    border: none;
-    border-radius: 4px;
-    background-color: #FFFFFA;
-    min-height: 50px;
-    font-size: 15px;
-}
-
-.bookmark-btn {
-	background: none;
-	border: none;
-	padding: 5px 2px;
-    cursor: pointer;
-    font-size: 15px;
-    color: #156206;
-	transition: transform 0.2s, color 0.2s;
-}
-
-.bookmark-btn:hover {
-	border: none
-}
-
-.page-btn {
+/* 페이지네이션 */
+.month-select {
   padding: 6px 12px;
-  margin: 0 3px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 120px; /* 👉 너비 조절 가능: 원하면 140~160px도 가능 */
   background-color: #fff;
-  color: #156206;
-  border: 1px solid #156206;
-  border-radius: 5px;
+  color: #333;
   cursor: pointer;
 }
 
-.page-btn.active {
-  background-color: #156206;
-  color: #fff;
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
 }
 
+.page-btn {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    color: #333;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    min-width: 45px;
+    text-align: center;
+    display: inline-block;
+}
+
+.page-btn:hover {
+	cursor: pointer;
+    background-color: #f5f5f5;
+    border-color: #999;
+    text-decoration: none;
+}
+
+.page-btn.active {
+    background-color: #f5f5f5;
+    color: #333;
+    border-color: #999;
+}
 /* 게임 리스트 그리드 스타일 */
 .game-list {
   padding: 20px 40px;
@@ -367,14 +339,14 @@ body {
 
 .game-item h4 {
   margin-bottom: 12px;
-  color: #156206;
+  color: #222222;
   font-size: 16px;
   font-weight: 600;
 }
 
 .game-item p {
   margin-bottom: 8px;
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.4;
 }
 
@@ -387,16 +359,6 @@ body {
   text-align: center;
 }
 
-.month-select {
-  padding: 6px 12px;
-  font-size: 15px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 120px; /* 👉 너비 조절 가능: 원하면 140~160px도 가능 */
-  background-color: #fff;
-  color: #333;
-  cursor: pointer;
-}
 </style>
 </head>
 <body>
@@ -406,7 +368,7 @@ body {
 
 		<!-- 로고 -->
 		<div class="logo">
-		<img class="logo-image" alt="로고이미지" src="/trip/resources/images/main_logo.jpg">
+		<img class="logo-image" alt="로고이미지" src="/trip/resources/images/main_logo.png">
 			<h1><a href="index2.jsp">동틀무렵</a></h1>
 		</div>
 				
@@ -480,10 +442,7 @@ body {
     <!-- 배너 이미지 -->
     <div class="banner-section">
       <div class="banner-image">
-      	<img alt="" src="../../resources/images/main_image1.jpg">
-        <div>
-          🏃‍♂️ 다양한 대회에 참여하고 건강한 라이프스타일을 만들어보세요! 🏃‍♀️
-        </div>
+          2025 마라톤 대회 일정
       </div>
     </div>
 
@@ -541,7 +500,7 @@ body {
 	    // 대회 링크 URL 생성 (game_link 필드가 있다고 가정)
 	    var gameLink = game.game_link || 'http://www.marathon.pe.kr/index_calendar.html';
 	    var item = '<a href="' + gameLink + '" class="game-item" target="_blank">'
-	      + '<h4>📌 ' + game.game_name + '</h4>'
+	      + '<h4>🏃‍♂️ ' + game.game_name + '</h4>'
 	      + '<p><strong>날짜:</strong> ' + game.game_date + '</p>'
 	      + '<p><strong>장소:</strong> ' + game.game_place + '</p>'
 	      + '<p><strong>주최:</strong> ' + game.game_main + '</p>'

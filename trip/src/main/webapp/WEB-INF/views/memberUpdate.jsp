@@ -25,7 +25,7 @@
 }
 
 body {
-   background-color: #FFFFFA;
+   background-color: #f8f9fa;
    min-height: auto; /* vh 제거 */
    display: flex;
    justify-content: center;
@@ -125,7 +125,6 @@ body {
 /* 회원정보 수정 영역 스타일 */
 .profile-content {
     padding: 20px;
-    max-width: 500px;
     margin: 0 auto;
     width: 100%;
     display: flex;
@@ -136,7 +135,7 @@ body {
 .profile-title {
     font-size: 20px;
     font-weight: 700;
-    color: #156206;
+    color: #222;
     margin-bottom: 20px;
     text-align: center;
     padding-bottom: 10px;
@@ -144,12 +143,15 @@ body {
 }
 
 .form-group {
-    margin-bottom: 10px;
+    display: flex;
+    align-items: center;           /* 세로 정렬 중앙 */
+    margin-bottom: 20px;
+    width: 450px;
 }
 
 .form-input {
     width: 100%;
-    padding: 8px 10px;
+    padding: 10px 10px;
     border-radius: 5px;
     border: 1px solid #ddd;
     background-color: #fff;
@@ -158,10 +160,11 @@ body {
 
 .form-input:focus {
     outline: none;
-    border: 2px solid #ddd;
+    border: 1px solid #999;
 }
 
 .form-label {
+	width: 120px;
     display: block;
     margin-bottom: 6px;
     font-weight: 500;
@@ -170,7 +173,7 @@ body {
 
 .form-select {
     width: 100%;
-    padding: 8px 10px;
+    padding: 10px 10px;
     border-radius: 5px;
     border: 1px solid #ddd;
     background-color: #fff;
@@ -183,7 +186,7 @@ body {
 .btn-group {
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
+    margin-top: 30px;
     flex-wrap: wrap;
     gap: 10px;
 }
@@ -199,8 +202,9 @@ body {
 }
 
 .btn-primary {
-    background-color: #156206;
+    background-color: #222;
     color: white;
+    width: 110px;
     flex: 3;
     margin-right: 10px;
 }
@@ -208,13 +212,16 @@ body {
 .btn-danger {
     background-color: #FFFFFA;
     color: #ff4757;
+    width: 130px;
     border: 1px solid #ff4757;
     flex: 1;
+    display: flex;                /* 요소를 flexbox로 설정 */
+    justify-content: center;     /* 가로 가운데 정렬 */
+    align-items: center;         /* 세로 가운데 정렬 */
 }
 
 .btn:hover {
     opacity: 0.9;
-    transform: translateY(-2px);
 }
 
 .birthdate-container {
@@ -254,12 +261,12 @@ body {
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label" for="newPassword">새 비밀번호</label>
+                    <label class="form-label" for="newPassword">변경 비밀번호</label>
                     <input type="password" id="newPassword" name="human_pass" class="form-input" placeholder="새 비밀번호를 입력하세요">
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label" for="confirmPassword">새 비밀번호 확인</label>
+                    <label class="form-label" for="confirmPassword">변경 비밀번호<br> 확인</label>
                     <input type="password" id="confirmPassword" name="confirmPassword" class="form-input" placeholder="새 비밀번호를 다시 입력하세요">
                 </div>
                 
@@ -281,13 +288,13 @@ body {
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label" for="idHint">아이디 찾기용 질문</label>
+                    <label class="form-label" for="idHint">아이디 찾기<br> 질문</label>
                     <select id="idHint" name="idHint" class="form-select">
                         <option value="1">아이디 찾기용 질문을 선택하세요</option>
-                        <option value="2">내가 졸업한 초등학교는?</option>
-                        <option value="3">나의 보물 1호는?</option>
+                        <option value="2">어릴적 별명은?</option>
+                        <option value="3">반려견 이름은?</option>
                         <option value="4">내가 가장 좋아하는 영화는?</option>
-                        <option value="5">내가 가장 좋아하는 음식은?</option>
+                        <option value="5">친한 친구 이름은?</option>
                     </select>
                 </div>
                 
@@ -297,13 +304,13 @@ body {
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label" for="pwHint">비밀번호 찾기용 질문</label>
+                    <label class="form-label" for="pwHint">비밀번호 찾기<br> 질문</label>
                     <select id="pwHint" name="pwHint" class="form-select">
                         <option value="1">비밀번호 찾기용 질문을 선택하세요</option>
-                        <option value="2">나의 출신 초등학교는?</option>
-                        <option value="3">나의 첫 번째 애완동물 이름은?</option>
+                        <option value="2">내가 졸업한 초등학교는?</option>
+                        <option value="3">첫사랑 이름은?</option>
                         <option value="4">내가 태어난 고향은?</option>
-                        <option value="5">어머니의 성함은?</option>
+                        <option value="5">나의 보물 1호는?</option>
                     </select>
                 </div>
                 
